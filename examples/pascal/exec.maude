@@ -1,0 +1,28 @@
+--- Executing the tests for the grammar JSON
+
+set show advisories off .
+set show command off .
+
+--- Grammar without cuts
+load pascal .
+
+parse "Without cuts" .
+
+erew read-file("./yes//pascal1.pas") .
+erew read-file("./yes//pascal2.pas") .
+erew read-file("./yes//pascal3.pas") .
+erew read-file("./yes//pascal4.pas") .
+erew read-file("./yes//pascal5.pas") .
+
+--- Grammar with cuts
+load pascal-cut .
+
+parse "With cuts" .
+
+erew read-file("./yes//pascal1.pas") .
+erew read-file("./yes//pascal2.pas") .
+erew read-file("./yes//pascal3.pas") .
+erew read-file("./yes//pascal4.pas") .
+erew read-file("./yes//pascal5.pas") .
+
+quit .

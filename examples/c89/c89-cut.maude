@@ -1,0 +1,124 @@
+---  Grammar for C89
+
+load ../../peg-parser-count .
+    
+fmod G-INPUT is
+    pr PEG-SYNTAX .
+    --- Input grammar
+    op G : -> Grammar .
+        eq G =
+	'SKIP <- ("\n" / " " / "\t" / 'COMMENT) * ,
+	'translation-unit  <-  'SKIP . 'external-decl + . 'SKIP . ! [.],
+        'external-decl     <-  'function-def  /  'decl,
+	'function-def      <-  ('declarator . 'decl * . 'compound-stat)  /  'decl-spec . 'function-def ,
+	'decl-spec         <-  'storage-class-spec  /  'type-spec  /  'type-qualifier,
+	'decl              <-  'decl-spec . 'init-declarator-list ? . strTok(";")  /  'decl-spec . 'decl,
+	'storage-class-spec    <-  strTok("auto")  /  strTok("register")  /  strTok("static")  /  strTok("extern")  /  strTok("typedef") ,
+
+	'type-spec             <-  strTok("void")  /  strTok("char")  /  strTok("short")  /  strTok("int")  /
+	strTok("long")  / strTok("float")  / strTok("double")  /  strTok("signed")  /  strTok("unsigned")  /
+	'typedef-name  / strTok("enum") . 'ID ? . strTok("{") .  'enumerator .  (strTok(",") . ['enumerator]e ) * . [strTok("}")]e /
+	strTok("enum") . 'ID  / 'struct-or-union . 'ID ? . strTok("{") . ['struct-decl +]e . [strTok("}")]e /
+	'struct-or-union . 'ID ,
+	'type-qualifier        <-  strTok("const")  /  strTok("volatile") ,
+	'struct-or-union       <-  strTok("struct")  /  strTok("union"),
+	'init-declarator-list  <-  'init-declarator . (strTok(",") . 'init-declarator ) *,
+	'init-declarator       <-  ('declarator . strTok("=") .  'initializer)  / 'declarator,
+	'struct-decl           <-  ('spec-qualifier . 'struct-declarator . (strTok(",") . 'struct-declarator ) * . strTok(";"))  / 'spec-qualifier . 'struct-decl ,
+	'spec-qualifier-list   <-  ('type-spec  /  'type-qualifier) +,
+	'spec-qualifier        <-  'type-spec  /  'type-qualifier,
+	'struct-declarator     <-  'declarator ? . strTok(":") . 'const-exp  /  'declarator,
+	'enumerator            <-  'ID . strTok("=") . ['const-exp]e  /  'ID,
+	'declarator            <-  'pointer ? . 'direct-declarator,
+	'direct-declarator     <-  ('ID  /  strTok("(") . 'declarator . strTok(")")) . (strTok("[") . 'const-exp ? . strTok("]")  / strTok("(") . 'param-type-list . strTok(")")  / strTok("(") . 'id-list ? . strTok(")") ) *,
+	'pointer               <-  strTok("*") . 'type-qualifier * . 'pointer  /  strTok("*") . 'type-qualifier *,
+	'param-type-list       <-  'param-decl . (strTok(",") . 'param-decl ) * . (strTok(",") . strTok("...") ) ? ,
+	'param-decl            <-  'decl-spec + .  ('declarator  /  'abstract-declarator) ?,
+	'id-list               <-  'ID . (strTok(",") . 'ID ) * ,
+	'initializer           <-  strTok("{") . 'initializer . (strTok(",") . 'initializer ) * . strTok(",") ? . [strTok("}")]e  / 'assignment-exp,
+	'type-name             <-  'spec-qualifier-list . 'abstract-declarator ?,
+	'abstract-declarator   <-  'pointer  /  'pointer ? . 'direct-abstract-declarator,
+	'direct-abstract-declarator <- strTok("(") . 'abstract-declarator . [strTok(")")]e . (strTok("[") . 'const-exp ? . [strTok("]")]e  / strTok("(") . 'param-type-list ? . [strTok(")")]e) *,
+	'typedef-name          <-  'ID,
+	'stat                  <-  'ID . strTok(":") . 'stat / 
+    strTok("case") . ['const-exp]e . [strTok(":")]e . ['stat]e   /
+	strTok("default") . [strTok(":")]e .  ['stat]e  / 'exp ? .  strTok(";")  / 'compound-stat /
+	strTok("if") . [strTok("(")]e . ['exp]e . [strTok(")")]e . ['stat]e . strTok("else") . ['stat]e /
+	strTok("if") .  [strTok("(")]e .  ['exp]e . [strTok(")")]e . ['stat]e /
+	    strTok("switch") . [strTok("(")]e . ['exp]e . [strTok(")")]e . ['stat]e /
+	    strTok("while") . [strTok("(")]e . ['exp]e . [strTok(")")]e . ['stat]e /
+	    strTok("do") .  ['stat]e .  [strTok("while")]e . [strTok("(")]e .  ['exp]e  . [strTok(")")]e . [strTok(";")]e /
+	    strTok("for") . [strTok("(")]e . 'exp ? . [strTok(";")]e . 'exp ? . [strTok(";")]e . 'exp ? . [strTok(")")]e . 'stat  /
+	    strTok("goto") . ['ID]e  . [strTok(";")]e /
+	    strTok("continue") . [strTok(";")]e /
+	    strTok("break") . [strTok(";")]e /
+	    strTok("return") . 'exp ? . [strTok(";")]e ,
+	    'compound-stat         <-  strTok("{") .  'decl * .  'stat * .  [strTok("}")]e,
+	    'exp                   <-  'assignment-exp . (strTok(",") . ['assignment-exp]e) *,
+	    'assignment-exp        <-  'unary-exp . 'assignment-operator . 'assignment-exp  / 'conditional-exp,
+	    'assignment-operator   <-  strTok("=") . ! "="  /  strTok("*=")  /  strTok("/=")  / strTok("%=") /  strTok("+=")  /  strTok("-=")  /
+	    strTok("<<=")  /  strTok(">>=")  /  strTok("&=")  /  strTok("^=")  /  strTok("|="),
+	    'conditional-exp       <-  'logical-or-exp . strTok("?") . ['exp]e .  [strTok(":")]e . ['conditional-exp]e  / 'logical-or-exp,
+	    'const-exp             <-  'conditional-exp,
+	    'logical-or-exp        <-  'logical-and-exp . (strTok("||") . ['logical-and-exp]e )*,
+	    'logical-and-exp       <-  'inclusive-or-exp . (strTok("&&") . ['inclusive-or-exp]e ) *,
+	    'inclusive-or-exp      <-  'exclusive-or-exp . (strTok("|") . ! strTok("|") . ['exclusive-or-exp]e ) *,
+	    'exclusive-or-exp      <-  'and-exp . (strTok("^") .  ['and-exp]e ) *,
+	    'and-exp               <-  'equality-exp .  (strTok("&") . ! strTok("&") . ['equality-exp]e ) *,
+	    'equality-exp          <-  'relational-exp . ((strTok("==") / strTok("!=")) .  ['relational-exp]e ) *,
+	    'relational-exp        <-  'shift-exp . ((strTok("<=") / strTok(">=") / strTok("<") / strTok(">")) . 'shift-exp ) *,
+	    'shift-exp             <-  'additive-exp . ((strTok("<<") / strTok(">>")) . ['additive-exp]e ) * ,
+	    'additive-exp          <-  'multiplicative-exp .  ((strTok("+") / strTok("-")) . ['multiplicative-exp]e ) *,
+	    'multiplicative-exp    <-  'cast-exp .  ((strTok("*") / strTok("/") / strTok("%")) . ['cast-exp]e )*,
+	    'cast-exp              <-  strTok("(")  . 'type-name . [strTok(")")]e . 'cast-exp  /  'unary-exp,
+	    'unary-exp             <-  strTok("++") . ['unary-exp]e  /  strTok("--") . ['unary-exp]e  / 'unary-operator . ['cast-exp]e  /
+	    strTok("sizeof") . ( ( strTok("(") . 'type-name . strTok(")") ) / 'unary-exp)   / 'postfix-exp ,
+
+
+	    'postfix-exp           <-  'primary-exp . (strTok("[") . ['exp]e . [strTok("]")]e  /
+	      strTok("(") . ('assignment-exp . (strTok(",") . ['assignment-exp]e ) * ) ? . [strTok(")")]e  /
+	      strTok(".") . ['ID]e   /  strTok("->") . ['ID]e  /  strTok("++")  /  strTok("--")) *,
+
+
+	    'primary-exp           <-  'ID  /  'STRING  /  'constant  /  strTok("(") . 'exp . [strTok(")")]e,
+	    'constant              <-  'INT-CONST  /  'CHAR-CONST  /  'FLOAT-CONST  /  'ENUMERATION-CONST,
+
+
+	    'unary-operator        <-  strTok("&")  /  strTok("*")  /  strTok("+")  /  strTok("-")  /  strTok("~")  /  strTok("!"),
+	    'COMMENT               <-  strTok("/*") .  (! strTok("*/") . [.] ) * . [strTok("*/")]e ,
+	    'INT-CONST             <-  ( "0" .  'XDIGIT +  /  ! "0" . 'DIGIT . 'DIGIT *  /  "0" . [0-9] *) . 'SKIP, 
+	    'FLOAT-CONST           <-  strTok("0x") . (
+	      (("." / 'XDIGIT + )  /  ('XDIGIT + / ".")) . ( 'XDIGIT +) ? ), 
+	    'XDIGIT                <- [0-9], 
+	    'DIGIT                 <- [0-9],
+	    'CHAR-CONST            <-  "'" . ([a-z]  /  ! "'" . [.]) .  "'", 
+
+
+
+
+	    'STRING                <-  strTok("\"") . (! "\"" . [.]  )* . strTok("\""), 
+
+	    'ENUMERATION-CONST     <-  'ID,
+
+	    'ID                    <-  (! 'KEYWORDS) . [a-zA-Z]  . [0-Z-]  * . 'SKIP,  
+
+	    'KEYWORDS              <-  (strTok'("auto")  /  strTok'("double")  /  strTok'("int")  /  strTok'("struct")  /
+	      strTok'("break")  /  strTok'("else")  /  strTok'("long")  /  strTok'("switch")  /
+	      strTok'("case")  /  strTok'("enum")  /  strTok'("register")  /  strTok'("typedef")  /
+	      strTok'("char")  /  strTok'("extern")  /  strTok'("return")  /  strTok'("union") /
+	      strTok'("const")  /  strTok'("float")  /  strTok'("short")  /  strTok'("unsigned")  /
+	      strTok'("continue")  /  strTok'("for")  /  strTok'("signed")  /  strTok'("void")  /
+	      strTok'("default")  /  strTok'("goto")  /  strTok'("sizeof")  /  strTok'("volatile")  /
+	      strTok'("do")  /  strTok'("if")  /  strTok'("static")  /  strTok'("while") ) . ! [0-Z] . 
+
+
+	  --- Initial expression
+    op IE : -> Exp .
+    eq IE = 'translation-unit . 'SKIP .
+endfm
+
+view Test from GRAMMAR-INPUT to G-INPUT is endv   
+
+mod TEST is
+    pr PEG-RULES-IO{Test} .
+endm

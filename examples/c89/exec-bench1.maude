@@ -1,0 +1,104 @@
+--- Executing the tests for the grammar c89 with and without cuts
+
+set show advisories off .
+set show command off .
+
+--- Grammar without cuts
+load c89 .
+
+parse "Without cuts" .
+erew read-file("./bench1/yes/trace.c") .
+erew read-file("./bench1/yes/tree-diff.c") .
+erew read-file("./bench1/yes/version.c") .
+erew read-file("./bench1/yes/walker.c") .
+erew read-file("./bench1/no/trace-00.c") .
+erew read-file("./bench1/no/trace-01.c") .
+erew read-file("./bench1/no/trace-02.c") .
+erew read-file("./bench1/no/trace-03.c") .
+erew read-file("./bench1/no/trace-04.c") .
+erew read-file("./bench1/no/trace-05.c") .
+erew read-file("./bench1/no/trace-06.c") .
+erew read-file("./bench1/no/trace-07.c") .
+erew read-file("./bench1/no/trace-08.c") .
+erew read-file("./bench1/no/trace-09.c") .
+erew read-file("./bench1/no/tree-diff-00.c") .
+erew read-file("./bench1/no/tree-diff-01.c") .
+erew read-file("./bench1/no/tree-diff-02.c") .
+erew read-file("./bench1/no/tree-diff-03.c") .
+erew read-file("./bench1/no/tree-diff-04.c") .
+erew read-file("./bench1/no/tree-diff-05.c") .
+erew read-file("./bench1/no/tree-diff-06.c") .
+erew read-file("./bench1/no/tree-diff-07.c") .
+erew read-file("./bench1/no/tree-diff-08.c") .
+erew read-file("./bench1/no/tree-diff-09.c") .
+erew read-file("./bench1/no/version-00.c") .
+erew read-file("./bench1/no/version-01.c") .
+erew read-file("./bench1/no/version-02.c") .
+erew read-file("./bench1/no/version-03.c") .
+erew read-file("./bench1/no/version-04.c") .
+erew read-file("./bench1/no/version-05.c") .
+erew read-file("./bench1/no/version-06.c") .
+erew read-file("./bench1/no/version-07.c") .
+erew read-file("./bench1/no/version-08.c") .
+erew read-file("./bench1/no/version-09.c") .
+erew read-file("./bench1/no/walker-00.c") .
+erew read-file("./bench1/no/walker-01.c") .
+erew read-file("./bench1/no/walker-02.c") .
+erew read-file("./bench1/no/walker-03.c") .
+erew read-file("./bench1/no/walker-04.c") .
+erew read-file("./bench1/no/walker-05.c") .
+erew read-file("./bench1/no/walker-06.c") .
+erew read-file("./bench1/no/walker-07.c") .
+erew read-file("./bench1/no/walker-08.c") .
+erew read-file("./bench1/no/walker-09.c") .
+
+--- Grammar with cuts
+load c89-cut .
+
+parse "With cuts" .
+erew read-file("./bench1/yes/trace.c") .
+erew read-file("./bench1/yes/tree-diff.c") .
+erew read-file("./bench1/yes/version.c") .
+erew read-file("./bench1/yes/walker.c") .
+erew read-file("./bench1/no/trace-00.c") .
+erew read-file("./bench1/no/trace-01.c") .
+erew read-file("./bench1/no/trace-02.c") .
+erew read-file("./bench1/no/trace-03.c") .
+erew read-file("./bench1/no/trace-04.c") .
+erew read-file("./bench1/no/trace-05.c") .
+erew read-file("./bench1/no/trace-06.c") .
+erew read-file("./bench1/no/trace-07.c") .
+erew read-file("./bench1/no/trace-08.c") .
+erew read-file("./bench1/no/trace-09.c") .
+erew read-file("./bench1/no/tree-diff-00.c") .
+erew read-file("./bench1/no/tree-diff-01.c") .
+erew read-file("./bench1/no/tree-diff-02.c") .
+erew read-file("./bench1/no/tree-diff-03.c") .
+erew read-file("./bench1/no/tree-diff-04.c") .
+erew read-file("./bench1/no/tree-diff-05.c") .
+erew read-file("./bench1/no/tree-diff-06.c") .
+erew read-file("./bench1/no/tree-diff-07.c") .
+erew read-file("./bench1/no/tree-diff-08.c") .
+erew read-file("./bench1/no/tree-diff-09.c") .
+erew read-file("./bench1/no/version-00.c") .
+erew read-file("./bench1/no/version-01.c") .
+erew read-file("./bench1/no/version-02.c") .
+erew read-file("./bench1/no/version-03.c") .
+erew read-file("./bench1/no/version-04.c") .
+erew read-file("./bench1/no/version-05.c") .
+erew read-file("./bench1/no/version-06.c") .
+erew read-file("./bench1/no/version-07.c") .
+erew read-file("./bench1/no/version-08.c") .
+erew read-file("./bench1/no/version-09.c") .
+erew read-file("./bench1/no/walker-00.c") .
+erew read-file("./bench1/no/walker-01.c") .
+erew read-file("./bench1/no/walker-02.c") .
+erew read-file("./bench1/no/walker-03.c") .
+erew read-file("./bench1/no/walker-04.c") .
+erew read-file("./bench1/no/walker-05.c") .
+erew read-file("./bench1/no/walker-06.c") .
+erew read-file("./bench1/no/walker-07.c") .
+erew read-file("./bench1/no/walker-08.c") .
+erew read-file("./bench1/no/walker-09.c") .
+
+quit .

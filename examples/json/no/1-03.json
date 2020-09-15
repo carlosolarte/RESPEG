@@ -1,0 +1,10 @@
+{"menu": {
+   "id": "file",
+    "value": "File,
+    "opup": {
+        "menuitem": [
+            {"value": "New", "onclick":"CreteNewDoc()",
+            {"value": "Open", "onclick": "OpenDoc()",
+            {"value": "Close", "onclick": "CoseDoc()"
+        
+    

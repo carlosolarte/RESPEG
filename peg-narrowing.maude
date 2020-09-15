@@ -1,0 +1,205 @@
+---- Trying to avoid duplications in the unifiers. For that, the
+---- structural axioms are omitted and the rules are written
+---- explicitly with two variables
+-----------
+--- SYNTAX
+-----------
+
+load peg-syntax .
+fmod PEG-CONSTRAINT is
+    pr NAT .
+    pr PEG-SYNTAX .
+
+    sort AConstraint Constraint .
+    subsort TSymbol < AConstraint < Constraint .
+    
+    op ~_ : TSymbol -> AConstraint [prec 20] .
+
+    op tt : -> Constraint [ctor] .
+    op ff : -> Constraint [ctor] .
+    op _/\_ : Constraint Constraint  -> Constraint [ctor assoc comm id: tt prec 40] .
+
+    var c c'  : Constraint .
+    var ac ac'  : AConstraint .
+    var tc tc' : TChar .
+    var t t' : TSymbol .
+
+    sort CStr .
+    sort BConstraint .
+
+    subsort BConstraint < CStr .
+    op nil : -> CStr .
+    op {_} : Constraint -> BConstraint .
+    eq  ff /\ ac  =  ff  .
+    eq  ff /\ ff  =  ff  .
+    eq { c /\ ac /\ ac } = { c /\ ac }  .
+    eq { c /\ tc /\ tc' } = { c /\ if tc == tc' then tc else ff fi } .
+    eq { c /\ ~ tc /\ tc' } = { c /\ if tc == tc' then ff else tc' fi } .
+    eq { c /\ [.] /\ ~ tc } = { c /\ ~ tc } .
+    eq { c /\ [.] /\ tc } = { c /\ tc } .
+    eq ~ [.] = ff .
+    eq { c /\ t /\ ~ t } = { ff } .
+    eq { c /\ tc /\ ~ t } = { c /\ if eq-t(t, tc) then ff else tc fi } .
+    eq { c /\ tc /\ t } = { c /\ if eq-t(t, tc) then tc else ff fi } .
+    ceq { c /\ ~ tc /\ t } = { c /\ t } if not eq-t(t, tc) .
+
+    op _._ : BConstraint CStr -> CStr [ctor right id: nil] .
+
+    var x : CStr .
+    eq { ff } . { c } . x = { ff } .
+    eq { c } . { ff } . x = { ff } .
+
+endfm
+
+
+mod PEG-SEMANTICS is
+    pr PEG-CONSTRAINT .
+
+    --- ----------------
+    --- States
+    --- ----------------
+    --- Parsing states: < G ; p ; x >
+    --- G is a grammar, p is a PEG and s a string
+
+    sort State .
+    op _[_]_;_ : Grammar Exp CStr CStr -> State . 
+    --- Failing states
+    ops fail : CStr CStr -> State .
+
+    --- States can be also strings (the suffix not consumed)
+    op ok : CStr CStr -> State .
+
+     eq ok(x, { ff } ) = fail(x, { ff })  .
+     eq ok({ff } , x ) = fail({ff},  x ) .
+
+    --- Constructors on states to define the semantics of Negation,
+    --- Choice, composition and repetition
+    op NEG : State Grammar CStr  -> State [ctor] .
+    op CHOICE : State Grammar Exp CStr  CStr -> State [ctor] .
+    op COMP : State Grammar Exp  -> State [ctor] .
+    op STAR : State Grammar Exp  CStr CStr -> State [ctor frozen (2)] .
+
+
+    --- Generating sequences of {tt}
+    op ltrue : Nat -> CStr .
+    eq ltrue(0) = nil .
+    eq ltrue(s(n)) = { tt } . ltrue(n) .
+
+    --- initial state
+    op st : Grammar Exp Nat -> State .
+    op $st : Exp Nat -> State .
+    eq st(G, e, n) =  G [ e ] ltrue(n) ; nil .
+    eq $st(e, n) =  nil [ e ] ltrue(n) ; nil .
+
+    --- insert in the end
+    op ins : BConstraint CStr -> CStr .
+    eq ins({ c} , nil) = { c} .
+    eq ins({ c} , {c'} . x) = { c'} . ins({ c}, x) .
+
+    op concat : CStr CStr -> CStr .
+    eq concat(nil, y) = y .
+    eq concat({ c} . x , y) = { c} . concat(x, y) .
+
+    --- Conjunction of constrains on string (the length does not need to be the same)
+    op conj : CStr CStr -> CStr .
+    eq conj(x, nil) = x .
+    eq conj(nil, y) = nil .
+    eq conj({ c} . x , { c'} . y) = { c /\ c' } . conj(x, y) .
+
+
+
+
+    --- ------------------------
+    vars G G'        : Grammar .
+    vars e e'        : Exp .
+    vars x x' y y' z z'    : CStr .
+    vars N N'        : NTSymbol .
+    vars t t'        : TSymbol .
+    vars tc tc'      : TChar .
+    vars S S'        : State .
+    vars n  n'       : Nat .
+    vars c c'        : Constraint .
+    --- ------------------------
+
+    --- x ; y (x already consumed and constrained)
+
+    rl [empty] : G [ emp ] x ; y => ok(x ,y) [ narrowing ] .
+
+    rl [NTerminal] : (G, N <- e) [ N ] x ; y  => (G, N <- e ) [e ] x ; y  [ narrowing ] .
+
+    rl [Terminal] :  G [ t ] { c } . x ; y  => ok(x , ins({ c /\ t } , y)) [ narrowing ] .
+    rl [Terminal] :  G [ t ] { c } . x ; y  => fail({ c /\ ~ t } . x , y) [ narrowing ] .
+    rl [Terminal] :  G [ t ] nil ; y  => fail(nil , y) [ narrowing ] .
+
+
+    rl [Sequence] : G [ (e . e') ] x ; y  => COMP(  G [ e ] x ; y  , G , e' ) [ narrowing ] .
+
+    rl [Sequence] : COMP(fail(x, y) , G, e ) => fail(x, y) [ narrowing ] .
+    rl [Sequence] : COMP( ok(y,z) , G, e' ) => G [ e' ] y ; z [ narrowing ] .
+
+    rl [Choice] :  G [ (e / e') ] x ; y  => CHOICE(  G [ e ] x ; nil  ,  G, e', x, y ) [ narrowing ] .
+    rl [Choice] : CHOICE( fail(x, y) , G, e', x', y') => G [ e' ] conj(x', concat(y, x)) ; y'    [ narrowing ] .
+    rl [Choice] : CHOICE( ok(x,z) , G, e', x', y') => ok(x, concat(y', z)) [ narrowing ] . --- concat???
+
+    rl [Negative] : G  [ ! e ] x ; y => NEG( G [ e ] x ; nil , G ,  y ) [ narrowing ] .
+    rl [Negative] : NEG(fail(x, z), G,  y ) => ok(concat(z, x), y) [ narrowing ] .
+    rl [Negative] : NEG(ok(x,z), G, y) => fail(concat(z, x), y) [ narrowing ] .
+
+    rl [Star] : G [ e * ] x ; y   => STAR( G [ e ] x ; nil  ,  G , e , x , y ) [ narrowing ] .
+    rl [Star] : STAR(ok(x,z) ,  G , e  , x', y'  ) => STAR( G [ e ] x ; nil ,  G ,  e , x, concat(y', z)) [ narrowing ] .
+    rl [Star] : STAR(fail(x,y),  G , e  , x', y' ) => ok(conj(x', concat(y,x)), y') [ narrowing ] .
+
+    op json : -> Grammar .
+    eq json =
+	'json           <- 'value . 'EOF, 
+    'obj            <- strTok("{") . 'pair . (strTok(",") . 'pair) * . strTok("}") / strTok("{") . strTok("}"), 
+    'pair           <- 'STRING . strTok(":") . 'value,
+    'arr            <- strTok("[") . 'value . (strTok(",") . 'value)* . strTok("]") / strTok("[") . strTok("]") ,
+    'value          <- 'STRING / 'NUMBER / 'obj / 'arr / strTok("true") / strTok("false") / strTok("null"),
+    'STRING         <-  strTok("\"") . (! "\"" . [.])* . strTok("\"")  /  strTok("'") . (! "'" . [.])* . strTok("'"),
+    'NUMBER         <- "-" ? . [0-9]+ . ("." . ! "." . [0-9]*)? . 'SKIP, 
+    'EOF            <- 'SKIP . ! [.], 
+	'SKIP           <- ("\n" / " " / "\t" ) * 
+    .
+endm
+
+eof
+
+--- some tests
+
+search  $st("a", 2) =>* ok(x,y) .
+search  $st("a" . "b" , 2) =>* ok(x,y) .
+search  $st( ("a" / "b") . "c" , 2) =>* ok(nil, x) .
+search  $st( ! ("a" / "b") . "c" , 2) =>* ok(x,y) .
+search  $st( ! ("a" )  , 2) =>* ok(x,y) .
+search  $st( ! ("a" ) . "a" , 2) =>* ok(x, y) .
+search  $st( ! ("a" ) . "b" . ("c" / "d") , 2) =>* ok(nil, x) .
+search  $st( "a" . ! [.] , 2) =>* ok(nil, x) .
+search  $st( ! [0-9] . "a" , 2) =>* ok(x,y) .
+
+
+search  $st( "a" * . "b" , 3) =>* ok(x,y) .
+search  st( 'NUMBER <-  [0-9]+ . ("." . ( ! "." . [0-9])+)? , 'NUMBER , 3) =>* ok(x,y) .
+
+--- a^nb^nc^n
+search st( ('S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c") , 'S , 3 ) =>* ok(x,y) .
+
+--- anbncn like Ford (with mistake: it recognizes also aaa)
+search st( ( 'A <- ("a" . 'A . "b") / emp , 'B <- ("b" . 'B . "c") / emp , ('D <- ( ! !  ('A . ! "b")) . "a" * . 'B . ! [.])) , 'D  , 6 )  =>* ok(x,y) .
+
+search st( ('Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End),  'Comment  , 6 ) =>* ok(x,y) .
+
+
+search json ['json] ({[0-9]} . {tt} . {tt}) ; nil  =>* ok(nil, x') .
+search st(json, 'json, 3) =>* ok(nil,y) .
+
+search [1] $st( [0-9] . "a", 2) =>* ok(nil, x) .
+
+search  $st( [0-9]+ . ("." . ( ! "." . [0-9])+)? . " "  , 3) =>* ok(x,y) .
+
+
+--- Comments Pascal
+search st( ('open <- "(" . "*" / "{", 'comment <- 'open .  (! 'close . [.]) * . 'close, 'close <- "*" . ")" / "}") , 'comment , 6) =>* ok(nil, x) .
+--- C++
+
+

@@ -1,0 +1,29 @@
+---  Example JSON (with cut annotations)
+
+load ../../peg-parser-count .
+    
+fmod G-INPUT is
+    pr PEG-SYNTAX .
+    --- Input grammar
+    op G : -> Grammar .
+    eq G =
+	'json           <- 'value . 'EOF, 
+    'value          <- 'obj / 'arr / 'STRING / 'NUMBER /  strTok("true") / strTok("false") / strTok("null"),
+    'obj            <- strTok("{") . 'pair .  (strTok(",") . 'pair   ) * . [strTok("}") ]e  / strTok("{") . [ strTok("}") ]e, 
+    'pair           <- 'STRING . strTok(":") . 'value,
+    'arr            <- strTok("[") . 'value . (strTok(",") .  'value  )* .  [strTok("]") ]e  / strTok("[") . [ strTok("]") ]e ,
+    'STRING         <-  strTok("\"") .  (! "\"" . [.])* .  strTok("\"")  /  strTok("'") .  (! "'" . [.])* .  strTok("'")  ,
+    'NUMBER         <- "-" ? . [0-9]+ .   ("." . ! "." . [0-9]+)?   . 'SKIP, 
+    'EOF            <- 'SKIP . ! [.], 
+	'SKIP           <- ("\n" / " " / "\t" ) * 
+    .
+	  --- Initial expression
+    op IE : -> Exp .
+    eq IE = 'json .
+endfm
+
+view Test from GRAMMAR-INPUT to G-INPUT is endv   
+
+mod TEST is
+    pr PEG-RULES-IO{Test} .
+endm

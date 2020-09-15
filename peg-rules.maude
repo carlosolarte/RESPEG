@@ -1,0 +1,131 @@
+--- ----------
+--- Semantics
+--- ----------
+
+--- A naive interpreter for PEGs: Operational rules are directly
+--- translated as rewrite rules
+
+--- This rewrite theory is not quite efficient (see some tests in the
+--- end of the file). The main reason is that it extensively uses
+--- conditional rules for given semantics to choices, sequential
+--- composition and negation. Note that PEGs are deterministic and
+--- then, the search command is not needed (rew is enough).
+
+load peg-syntax .
+
+mod PEG-SEMANTICS is
+    pr PEG-SYNTAX .
+
+    --- ----------------
+    --- States
+    --- ----------------
+    --- Parsing states: < G ; p ; x >
+    --- G is a grammar, p is a parsing expression and x a Str
+
+    sort State .
+    op _[_]_ : Grammar Exp Str -> State [ctor] .
+    --- Failing states
+    ops fail error : -> State .
+    --- States can be also strings (the suffix not consumed)
+    subsort Str < State .
+
+    --- ------------------------
+    vars G G'        : Grammar .
+    vars e e'        : Exp .
+    vars x x' y z    : Str .
+    vars N N'        : NTSymbol .
+    vars t t'        : TSymbol .
+    vars tc tc'      : TChar .
+    vars S S'        : State .
+    --- ------------------------
+
+    rl [empty] : G [ emp ] x => x .
+
+
+    rl [Terminal] :  G [ t ] tc x => if eq-t(t,tc)  then x else fail fi .
+
+    rl [Terminal] :  G [t] eps  => fail .
+
+    crl [NTerminal] : ( G, N <- e) [ N] x 
+     => S if (G, N <- e) [e] x => S .
+    
+    crl [Sequence] :  G  [e . e' ]  x 
+      => S if
+	  G [ e ] x  =>  y /\
+	  G [ e' ] y  => S .
+
+    crl [Sequence] : G [e . e'] x
+      => fail if
+	   G [ e ] x  =>  fail .
+
+    crl [Choice] :  G [ e / e'] x
+      => y if
+	  G [ e ]  x  =>  y .
+
+    crl [Choice] :  G [e / e'] x
+      => S if
+	  G [ e ] x  => fail /\
+	  G [ e' ] x  =>  S .
+
+    crl [Star] :  G [ e * ] x
+      => x if
+	  G [ e ] x  => fail .
+
+    crl [Star] :  G [ e * ] x 
+      => S  if
+	  G [ e ] x  => y /\
+	  G [e *] y  => S .
+
+    crl [Negative] : G  [ ! e ] x
+      => x if
+	   G [ e ] x  => fail .
+
+    crl [Negative] : G  [ ! e ] x
+      => fail if
+	  G [ e ] x  => y .
+
+endm
+
+eof
+
+--- --------------
+--- Some examples
+--- --------------
+
+rew  ('A <- "a") [ 'A ] "a" "b" .
+rew nil  [ "a" * ] "a" "b" "c" .
+rew nil  [ "a" * ] "a" "a" "b" "c" .
+rew nil  [ "a" * ] "b" "c" .
+rew ('A <- "a" , 'B <- "b")  [ 'A . 'B ] "a" "b" .
+rew ('A <- "a" . "b")  [ 'A  ] "a" "b" "c" .
+
+--- a^n b^n 
+rew ( ( 'A <- ( ("a" . ('A  . "b")) / emp ) )  ) [ 'A  ] str("ab") .
+rew ( ( 'A <- ( ("a" . ('A  . "b")) / emp ) )  ) [ 'A  ] str("abb") .
+
+--- Only a^n b^n sequents 
+rew ( 'S <- 'A . ! [.] , 'A <- ("a" . 'A  . "b" ) / emp   ) [ 'S  ] "a" "a" "a" "b" "b" "b" .
+rew ( 'S <- 'A . ! [.] , 'A <- ("a" . 'A  . "b" ) / emp   ) [ 'S  ] "a" "a" "a" "b" "b" "b" "b" .
+    
+
+rew ( 'Z  <- "a" / "b" / "c" ) [ 'Z * ] "a" "c" "c" "b" "d" .
+rew ( 'Z  <- "a" / "b" / "c" ) [ 'Z * . "d" . "e" ? ] "a" "c" "c" "b" "d" "e" .
+
+--- Comments of the form (* xxx *) ...
+rew ( 'Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End ) [ 'Comment  ] "(*" "a" "b" "b" "*)" .
+--- 1.8seg
+rew ( 'Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End ) [ 'Comment *  ] concat("(*", concat(str(" comment "), concat( "*)" , str(" Code outside comments"))))  .
+--- 3.3 seg
+rew ( 'Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End ) [ 'Comment *  ] concat("(*",  concat( str("comment 1"), concat( "*)", concat( "(*", concat( str("comment 2"), concat( "*)",  str("Code outside comments")))))))  .
+
+--- a^n b^n c^n
+rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("abc") .
+rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aabbcc") .
+rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aabbc").
+rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aaabbbccc") .
+--- 454ms
+rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aaaabbbbcccc") .
+--- 30s
+rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aaaaaabbbbbbcccccc") .
+
+

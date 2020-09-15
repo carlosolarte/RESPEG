@@ -1,0 +1,214 @@
+------------
+--- SYNTAX
+------------
+    
+--- This file defines the syntax for PEGs. Char (i.e., Maude Strings)
+--- are used to represent terminals and Qid are used to name
+--- non-terminals. Constructors for the usual [0-9], [a-zA-Z] are
+--- provided.
+
+--- According to the precedences,
+--- "a" / "b" . ! "c" . "d"  == ("a" / "b") . (! "c") . "d"
+
+--- Strings (inputs) are built by juxtaposition
+
+--- Concatenation of Maude's strings are renamed to ++ (to avoid
+--- conflicts with the symmbol + in PEGs)
+
+--- Some considerations:
+--- The initial rule must be names init
+--- Lower case Qids are used to syntax-nonterminals
+--- uppercase Qids are used to denote lexical rules
+
+fmod PEG-SYNTAX is
+    pr EXT-BOOL .
+    pr QID .
+
+    --- -----------------------------------
+    --- Terminal and non-terminal symbols
+    --- -----------------------------------
+    sorts NTSymbol TSymbol .
+
+    --- Terminal symbols can be Chars (i.e., strings) or the
+    --- usual matching expressions
+    sorts TChar TExp .
+    subsort String  < TChar .
+    subsort TChar TExp < TSymbol .
+
+    --- A special symbol for "no-match"
+    op no-match : -> TChar . 
+
+    --- Some useful abbreviations for matching. 
+    op [.] : -> TExp [ctor] . --- Any character
+    op [0-9] : -> TExp [ctor] .
+    op [a-z] : -> TExp [ctor] .
+    op [A-Z] : -> TExp [ctor] .
+    op [a-zA-Z] : -> TExp [ctor] .
+    --- a-zA-Z + 0-9
+    op [0-Z] : -> TExp [ctor] .
+    op [0-Z-] : -> TExp [ctor] .
+
+    --- Non-terminal symbols are Maude's QIDs.
+    subsort Qid < NTSymbol .
+
+    -----------------------
+    vars tc tc'    : TChar .
+    var t          : TSymbol .
+    var E          : Exp .
+    vars Q Q'      : Qid .
+    vars S S'      : String .
+    vars n  n'     : Nat .
+    vars st st'    : Str .
+    ------------------------
+
+    --- -----------------------------
+    --- Equality on terminal symbols
+    --- -----------------------------
+    --- The first parameter is taken from an expression and the second
+    --- is taken from the string
+    op eq-t : TSymbol TChar -> Bool .
+    eq eq-t(tc, tc') = tc == tc' .
+    eq eq-t([.], tc) = tc =/= no-match .
+    eq eq-t([0-9], tc) = tc >= "0" and-then tc <= "9" .
+    eq eq-t([a-z], tc) = tc >= "a" and-then tc <= "z" .
+    eq eq-t([A-Z], tc) = tc >= "A" and-then tc <= "Z" .
+    eq eq-t([a-zA-Z], tc) = eq-t([a-z], tc) or-else eq-t([A-Z], tc) .
+    eq eq-t([0-Z], tc) = eq-t([a-zA-Z], tc) or-else eq-t([0-9], tc) .
+    eq eq-t([0-Z-], tc) = eq-t([0-Z], tc) or-else tc == "_" .
+
+    
+    --- -----------------------------------
+    --- Strings
+    --- -----------------------------------
+    sort Str .
+    subsorts TChar < Str .
+    op eps : -> Str [ctor] . --- empty string
+    op __ : TChar Str -> Str [ctor gather(e E) right id: eps] .
+
+    --- using indices to access the elements of the string
+    op _[_] : Str Nat ~> TChar [memo] .
+    eq (tc st)[0] = tc .
+    eq (tc st)[s(n)] = st[n] .
+    eq st[n] = no-match [owise] .
+
+    op eq-t : TSymbol Str Nat -> Bool .
+    eq eq-t(t, st, n) = eq-t(t, st[n]) .
+
+    --- Length on Str
+    op len : Str -> Nat .
+    op len : Str Nat -> Nat .
+    eq len(st) = len(st, 0) .
+    eq len(eps,n) = n .
+    eq len( (tc st) , n) = len(st,s(n)) .
+
+    --- --------------------
+    --- Parsing Expressions
+    --- --------------------
+    sorts Exp .
+
+    --- Expressions: built from terminal and non-terminal symbols and
+    --- the empty expression
+    op emp : -> Exp [ctor] .
+    subsort TSymbol NTSymbol < Exp .
+
+    
+    --- Ops on expressions
+    --- Sequence
+    op _._ : Exp Exp -> Exp [ctor gather(e E) prec 20] . 
+    --- Ordered choice
+    op _/_ : Exp Exp -> Exp [ctor gather(e E) prec 60] .
+    --- Not predicate
+    op !_ : Exp -> Exp [ctor prec 10] .
+    --- Repetition
+    op _* : Exp -> Exp [ctor prec 10] .
+    --- Throw error
+    op throw : -> Exp [ctor] .
+    --- And predicate (derived connective) 
+    op &_ : Exp -> Exp [prec 10] .
+    eq (& E) = ! ( ! (E)) .
+    --- Optional (derived connective)
+    op _? : Exp -> Exp [prec 10]  .
+    eq (E ?) = E / emp .
+    --- One or more (derived connective)
+    op _+ : Exp -> Exp [prec 10] .
+    eq (E +) = E . E * .
+
+
+    --- Marking errors (local cuts)
+    op ex[_] : Exp -> Exp .
+    eq ex[E] = E / throw .
+
+    --- Deep cuts and catch
+    op [_]c : Exp -> Exp [ctor] . --- catch
+    op [_]e : Exp -> Exp [ctor] . --- try
+
+    
+    --- ------------------
+    --- Production Rules
+    --- -----------------
+    
+    --- Rules take the form A <- exp where A is a non-terminal symbol
+    --- and exp is an expression
+    sort Rule .
+    op _<-_ : NTSymbol Exp -> Rule [ctor prec 70] .
+
+    --- Grammars are sets of Rules
+    sort Grammar .
+    subsort Rule < Grammar .
+    op nil : -> Grammar [ctor] . --- empty set of rules
+    op _,_ : Grammar Grammar -> Grammar [ctor comm assoc id: nil prec 80] .
+
+    --- ------------------
+    --- Utilities
+    --- -----------------
+
+    --- An element from a string
+    op _[[_]] : String Nat -> Char .
+    eq S [[n]] = substr(S, n, 1) .
+
+    --- From Strings to Str
+    --- "abc" ==> "a" "b" "c"
+    op str : String -> Str .
+    op str : String Nat Str -> Str .
+    eq str(S) = str(S, sd(length(S),1), eps) .
+    eq str(S, 0, st) = (S [[ 0 ]]) st .
+    eq str(S, s(n), st) = str(S, n, (S [[ s(n) ]]) st) .
+
+    --- Concatenating Str
+    op concat : Str Str -> Str .
+    eq concat( eps, st') = st' .
+    eq concat( (tc st), st') = tc concat(st, st') .
+
+    --- From Strings to Expressions
+     --- "abc" ==> "a" . "b" . "c"
+    op strTok : String -> Exp . 
+    op strTok' : String -> Exp .
+    op strTok' : String Nat Nat -> Exp .
+
+    eq strTok'(S) = strTok'(S, 0, length(S)) .
+    eq strTok'(S, n, s(n)) = S [[ n ]] . 
+    eq strTok'(S, n, s(n')) = (S [[n]]) . (strTok'(S, s(n), s(n'))) [owise] .
+
+      --- Adding the non-terminal SKIP:
+      --- 'SKIP <- (" " / "\n" / "\t") * 
+    eq strTok(S) = strTok'(S) . 'SKIP .
+
+
+    --- Checking if an Expression is a non-terminal
+    op isNT? : Exp -> Bool .
+    eq isNT?(N:NTSymbol) = true .
+    eq isNT?(E:Exp) = false [owise] .
+
+    --- The initial rule must be marked with the id init
+    op isInit? : NTSymbol -> Bool .
+    eq isInit?(N:NTSymbol) = N:NTSymbol == 'init .
+endfm
+
+--- Input for the parser    
+th GRAMMAR-INPUT is
+    pr PEG-SYNTAX .
+    --- Input grammar
+    op G : -> Grammar .
+    --- Initial expression
+    op IE : -> Exp .
+endth

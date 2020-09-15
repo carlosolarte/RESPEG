@@ -1,0 +1,175 @@
+--- ----------
+--- Semantics
+--- ----------
+
+--- In this version, the CHOICE and NEG operators are defined in terms
+--- of constructors on states. This avoids conditional rules in
+--- the specification. This rewrite theory is then a refinement of the one in
+--- peg-rules.maude that exhibits a better performance
+
+--- The semantic operators "copy" the whole information for the continuation.
+--- This is later improved in peg-parser where more adjustments to the theory are
+--- implement to gain efficiency
+
+load peg-syntax .    
+load io-ext .    
+
+--------------
+--- SEMANTICS
+--------------
+    
+mod PEG-SEMANTICS is
+    pr PEG-SYNTAX .
+
+    --- ----------------
+    --- States
+    --- ----------------
+    --- Parsing states: < G ; p ; x >
+    --- G is a grammar, p is a PEG and s a string
+
+    sort State .
+    op _[_]_ : Grammar Exp Str -> State . 
+    --- Failing states
+    ops fail error : -> State [format (r o)].
+    --- States can be also strings (the suffix not consumed)
+    subsort Str < State .
+
+    --- Constructors on states to define the semantics of Negation,
+    --- Choice, composition and repetition
+    op NEG : State State -> State [ctor frozen (2)]  .
+    op CHOICE : State State -> State [ctor frozen (2)] .
+    op COMP : State State -> State [ctor frozen (2)] .
+    op STAR : State State -> State [ctor frozen (2)] .
+
+    --- Cuts
+    op TRY : State -> State .
+    op CATCH : State -> State .
+
+    eq [Catch] : CATCH(x) = x .
+    eq [Catch] : CATCH(fail) = fail .
+    eq [Catch] : CATCH(error) = fail .
+
+    eq [Try] : TRY(x) =  x .
+    eq [Try] : TRY(fail) = error .
+    eq [Try] : TRY(error) = error .
+
+
+    --- ------------------------
+    vars G G'        : Grammar .
+    vars e e'        : Exp .
+    vars x x' y z    : Str .
+    vars N N'        : NTSymbol .
+    vars t t'        : TSymbol .
+    vars tc tc'      : TChar .
+    vars S S'        : State .
+    vars n  n'       : Nat .
+    --- ------------------------
+
+    rl [empty] : G [ emp ] x  =>  x  .
+
+    rl [NTerminal] : (G, N <- e) [ N ] x => (G, N <- e) [ e ] x  .
+
+    rl [Terminal] :  G [ t ] tc x 
+      => if eq-t(t,tc)  then  x  else fail fi .
+
+    rl [Terminal] :  G [ t ] eps 
+      => fail .
+    
+    rl [Sequence] :  G [ (e . e') ] x 
+      => COMP(  G [ e ] x  ,  G [ e' ] x  ) .
+
+    rl [Sequence] : COMP(fail , S ) => fail .
+    rl [Sequence] : COMP(error , S ) => error .
+    rl [Sequence] : COMP( y  , G [ e' ] x ) => G [ e' ] y  .
+    
+    rl [Choice] :  G [ (e / e') ] x => CHOICE(  G [ e ] x  , G [ e' ] x ) .
+    rl [Choice] : CHOICE( fail , S) => S .
+    rl [Choice] : CHOICE( error , S) => error .
+    rl [Choice] : CHOICE(  x  , S) =>  x  .
+
+    rl [Star] :  G [ e * ] x  => STAR( G [ e ] x  , G [ e * ] x  ) .
+    
+    rl [Star] : STAR( y  ,  G [ e * ] x ) => STAR( G [ e ] y , G [ e * ] y ) .
+    
+    rl [Star] : STAR(fail,  G [ e * ] x ) => x  .
+    rl [Star] : STAR(error,  G [ e * ] x ) => error .
+
+    
+    rl [Negative] :  G  [ ! e ] x 
+      => NEG( G [ e ] x , G [ ! e ] x ) .
+    rl [Negative] : NEG(fail, G [ ! e ] x  ) =>  x  .
+    rl [Negative] : NEG(error, G [ ! e ] x  ) =>  x  .
+    rl [Negative] : NEG( y , S) => fail .
+
+    --- Cuts
+
+    rl [Try] :  G [ [ e ]e ] x  => TRY(G [ e ] x) .
+    rl [Catch] :  G [ [ e ]c ] x  => CATCH(G [ e ] x) .
+
+    --- Entry point
+    op parse : Grammar Exp Str -> State .
+    op parse : Exp Str -> State .
+    eq parse(G, e, x) =  G [ e ] x .
+    eq parse(e, x) =  nil [ e ] x .
+
+endm
+
+
+mod PEG-RULES-IO { X :: GRAMMAR-INPUT } is
+    pr IO-FILE * (op __ : Configuration Configuration -> Configuration to join ) .
+    pr PEG-SEMANTICS .
+
+    subsort State < Configuration .
+
+    --- -----------------------------
+    vars filename mode : String .
+    vars handler  : Oid .
+    vars S S' SS  : String .
+    var AS        : AttributeSet .
+    --- -----------------------------
+    
+    rl  < pid : cparse | text: S, done > 
+       =>
+	parse (G , IE , str(S)) .
+endm
+
+eof
+
+--- --------------
+--- Some examples
+--- --------------
+rew parse(('A <- "a"),  'A , "a" "b" ) .
+rew parse( ("a" *) ,  "a" "b" "c") .
+rew parse(  "a" * ,"a" "a" "b" "c") .
+rew parse( "a" *,   "b" "c" ) .
+rew parse(('A <- "a" , 'B <- "b"),  'A . 'B , "a" "b")  .
+
+--- a^n b^n 
+rew parse(( 'A <- ( ("a" . ('A  . "b")) / emp ) )  , 'A  , str("ab") ) .
+rew parse( ( 'A <- ( ("a" . ('A  . "b")) / emp ) )  , 'A  , str("abb") ) .
+
+--- Only a^n b^n sequents 
+rew parse( 'S <- 'A . ! [.] , 'A <- ("a" . 'A  . "b" ) / emp   , 'S  , "a" "a" "a" "b" "b" "b" ) .
+rew parse( 'S <- 'A . ! [.] , 'A <- ("a" . 'A  . "b" ) / emp   , 'S  , "a" "a" "a" "b" "b" "b" "b" ) .
+    
+
+rew parse( 'Z  <- "a" / "b" / "c" , 'Z * , "a" "c" "c" "b" "d" ) .
+rew parse( 'Z  <- "a" / "b" / "c" , 'Z * . "d" . "e" ? , "a" "c" "c" "b" "d" "e" ) .
+
+--- Comments of the form (* xxx *) ...
+rew parse( 'Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End , 'Comment  , "(*" "a" "b" "b" "*)" ) .
+rew parse( 'Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End , 'Comment *  , concat("(*", concat(str(" comment "), concat( "*)" , str(" Code outside comments"))))  ) .
+rew parse( 'Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End , 'Comment *  , concat("(*",  concat( str("comment 1"), concat( "*)", concat( "(*", concat( str("comment 2"), concat( "*)",  str("Code outside comments")))))))  ) .
+
+--- a^n b^n c^n
+rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("abc") ) .
+rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aabbcc") ) .
+rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aabbc")) .
+rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaabbbccc") ) .
+rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaaabbbbcccc") ) .
+rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaaaaabbbbbbcccccc") ) .
+
+
+-- 12ms
+rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc") ) .  
+

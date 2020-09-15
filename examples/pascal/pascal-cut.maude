@@ -1,0 +1,24 @@
+---  Comments in ISO 7185 and ISO 10206 Pascal
+
+load ../../peg-parser-count .
+    
+fmod G-INPUT is
+    pr PEG-SYNTAX .
+    --- Input grammar
+    op G : -> Grammar .
+    eq G =
+    'comment        <- 'open . (! 'close . [.])* . 'close,
+	'open           <- "(" . "*" / "{",
+    'close          <- "*" . [ ")" ]e / "}"
+    .
+	  --- Initial expression
+    op IE : -> Exp .
+    eq IE = 'comment .
+endfm
+
+view Test from GRAMMAR-INPUT to G-INPUT is endv   
+
+mod TEST is
+    pr PEG-RULES-IO{Test} .
+endm
+

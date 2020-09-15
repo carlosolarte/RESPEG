@@ -1,0 +1,53 @@
+[
+    {
+        "description": "required validation",
+        "schema": {
+            "properties": {
+                "foo": {"required" : true},
+                "bar": {}
+            }
+       ,
+        "tests": [
+            {
+                "description": "present required property is valid",
+                "data": {"foo": 1},
+                "valid": true
+            },
+            {
+                "description": "non-present required property is invalid",
+                "data": {"bar": 1},
+                "vald": false
+            
+        
+    },
+    {
+        "description": "required default validation",
+        "schema": {
+            "poperties": {
+                "foo": {
+            }
+        },
+        "tests": [
+            {
+                "description": "not required by default,
+                "data": {,
+                "valid": true
+            }
+        
+    },
+    {
+       "description": "required explicitly false validation",
+        "schema": {
+            "roperties": {
+                "foo": {"require": false
+           
+        },
+        "tests": [
+            {
+                "description": "not required if required is false",
+                "data": {},
+                "valid": true
+            }
+        
+    }
+

@@ -1,0 +1,79 @@
+---  Examples pallene
+
+load ../../peg-parser-count .
+    
+fmod G-INPUT is
+    pr PEG-SYNTAX .
+    --- Input grammar
+    op G : -> Grammar .
+    eq G =
+  'program         <-  'SKIP . ('toplevelfunc  /  'toplevelvar  /  'toplevelrecord  /  'import / 'foreign) * . 'SKIP . ! [.],
+  'toplevelfunc    <-  'localopt . strTok("function") . [ 'NAME ]e . [strTok("(")]e . 'paramlist . [strTok(")")]e . 'rettypeopt . 'block . [strTok("end") ]e ,
+  'toplevelvar     <-  'localopt . 'decl . [strTok("=")]e . 'exp,
+  'toplevelrecord  <-  strTok("record") . ['NAME . 'recordfields . strTok("end") ]e ,
+  'localopt        <-  strTok("local") ?, 
+  'import          <-  strTok("local") . 'NAME . strTok("=") . strTok("import") . [(strTok("(") . 'STRINGLIT . strTok(")") / 'STRINGLIT)]e,
+  'foreign         <-  strTok("local") . 'NAME . strTok("=") . strTok("foreign") .[ strTok("import") . (strTok("(") . 'STRINGLIT . strTok(")") / 'STRINGLIT)]e,
+  'rettypeopt      <-  (strTok(":") . ['rettype]e) ?,
+  'paramlist       <-  ('param . (strTok(",") . 'param) *) ?,
+  'param           <-  'NAME . strTok(":") . ['type]e,
+  'decl            <-  'NAME . (strTok(":") . ['type]e) ?,
+  'decllist        <-  'decl . (strTok(",") .  ['decl]e) *,
+  'simpletype      <-  strTok("nil") / strTok("boolean") / strTok("integer") / strTok("float") / strTok("string") / strTok("value") / 'NAME / strTok("{") . 'type . strTok("}"),
+  'typelist        <-  strTok("(") .  ('type . (strTok(",") . ['type]e) *) ? . [strTok(")")]e,
+  'rettype         <-  'typelist .  strTok("->") .  'rettype  /  'simpletype . strTok("->") . 'rettype  /  'typelist  /  'simpletype,
+  'type            <-  'typelist . strTok("->") . 'rettype  /  'simpletype . strTok("->") . 'rettype  /  'simpletype,
+  'recordfields    <-  'recordfield +,
+  'recordfield     <-  'NAME . strTok(":") . ['type . (strTok(";") ?)]e,
+  'block           <-  'statement * . 'returnstat ?,
+  'statement       <-  strTok(";")  /  strTok("do") . 'block . [strTok("end")]e  /  strTok("while") . ['exp]e . [strTok("do")]e . 'block . [strTok("end")]e  /  strTok("repeat") . 'block . strTok("until") . 'exp  /  strTok("if") . 'exp . strTok("then") . 'block . 'elseifstats . 'elseopt . strTok("end")  /  strTok("for") . 'decl . strTok("=") . 'exp . strTok(",") . 'exp . (strTok(",") . 'exp)? . strTok("do") . 'block . strTok("end")  /  strTok("local") . 'decllist . strTok("=") . 'explist  /  'varlist . strTok("=") . 'explist  /  'suffixedexp ,
+  'elseifstats     <-  'elseifstat *,
+  'elseifstat      <-  strTok("elseif") . 'exp . strTok("then") . 'block,
+  'elseopt         <-  (strTok("else") . 'block)?,
+  'returnstat      <-  strTok("return") .  'explist ? .  strTok(";") ?,
+  'exp             <-  'e1,
+  'e1              <-  'e2 . (strTok("or") .  ['e2]e) * ,
+  'e2              <-  'e3 . (strTok("and") . ['e3]e) *,
+  'e3              <-  'e4 . ((strTok("==") / strTok("~=") / strTok("<=") / strTok(">=") / strTok("<") / strTok(">")) . ['e4]e) *,
+  'e4              <-  'e5 . (strTok("|") . ['e5]e)*,
+  'e5              <-  'e6 . (strTok("~") . ! strTok("=")  . ['e6]e)*,
+  'e6              <-  'e7 . (strTok("&") .  ['e7]e)*,
+  'e7              <-  'e8 . ((strTok("<<") / strTok(">>")) . ['e8]e)*,
+  'e8              <-  'e9 . (strTok("..") . 'e8)?,
+  'e9              <-  'e10 . ((strTok("+") / strTok("-")) . 'e10)*,
+  'e10             <-  'e11 . ((strTok("*") / strTok("%%") / strTok("/") / strTok("//")) . 'e11)*,
+  'e11             <-  (strTok("not") / strTok("#") / strTok("-") / strTok("~"))* . 'e12,
+  'e12             <-  'castexp . (strTok("^") . ['e11]e) ?,
+  'suffixedexp     <-  'prefixexp . 'expsuffix + ,
+  'expsuffix       <-  'funcargs  /  strTok(":")  . [ 'NAME . 'funcargs ]e  /  strTok("[") . [ 'exp . strTok("]") ]e  /  strTok(".") . ! "." . ['NAME ]e,
+  'prefixexp       <-  'NAME  /  strTok("(") . 'exp . strTok(")"),
+  'castexp         <-  'simpleexp . strTok("as") . 'type  /  'simpleexp,
+  'simpleexp       <-  strTok("nil") / strTok("false") / strTok("true") / 'NUMBER / 'STRINGLIT / 'initlist / 'suffixedexp / 'prefixexp,
+  'var             <-  'suffixedexp  /  'NAME . ! 'expsuffix,
+  'varlist         <-  'var . (strTok(",") . ['var]e)*,
+  'funcargs        <-  strTok("(") . 'explist ? . strTok(")")  /  'initlist  /  'STRINGLIT ,
+  'explist         <-  'exp . (strTok(",") . ['exp]e)*,
+  'initlist        <-  strTok("{") . 'fieldlist ? .  [strTok("}")]e,
+  'fieldlist       <-  'field . ('fieldsep . 'field)* . 'fieldsep ?,
+  'field           <-  ('NAME . strTok("="))? . 'exp,
+  'fieldsep        <-  strTok(";") / strTok(",") ,
+  'STRINGLIT       <-  strTok("\"") . (! "\"" . [.])* . strTok("\"")  /  strTok("'") .  (! "'" . [.])* . strTok("'"),
+  'RESERVED        <-  ("a" . "n" . ["d"]e  / "a" . ["s"]e / "b" . "o" . [strTok'("olean")]e / "b" . "r" . [strTok'("eak")]e / "d" . ["o"]e / strTok'("elsei") . ["f"]e / strTok'("el") . [strTok'("se")]e / strTok'("e") . [strTok'("nd")]e / strTok'("fl") . [strTok'("oat")]e / strTok'("foreign") / strTok'("for") / strTok'("false")
+                     / strTok'("function") / strTok'("goto") / strTok'("if") / strTok'("import") / strTok'("integer") / strTok'("in") / strTok'("local") / strTok'("nil") / strTok'("not") / strTok'("or") 
+                     / strTok'("record") / strTok'("repeat") / strTok'("return") / strTok'("string") / strTok'("then") / strTok'("true") / strTok'("until") / strTok'("value") / strTok'("while")) . ![0-Z],
+  'NAME            <-  ! 'RESERVED . [0-Z] . [0-Z] * . 'SKIP, --- MODIFIED
+  'NUMBER          <- [0-9]+ . ("." . ! "." . [0-9]*)? . 'SKIP,
+  'COMMENT         <- strTok("--") . ( ! "\n" . [.])* . 'SKIP,
+  'SKIP <- ("\n" / " " / "\t" / 'COMMENT) * 
+  .
+
+	  --- Initial expression
+    op IE : -> Exp .
+    eq IE = 'program . 'SKIP .
+endfm
+
+view Test from GRAMMAR-INPUT to G-INPUT is endv   
+
+mod TEST is
+    pr PEG-RULES-IO{Test} .
+endm

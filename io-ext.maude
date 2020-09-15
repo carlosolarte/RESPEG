@@ -1,0 +1,59 @@
+--- ------------------------------------------------------
+--- Reading a file
+
+--- The final configuration takes the form
+--- < pid : cparse | done, text: "xxxx" >
+--- ------------------------------------------------------
+    
+load file .
+
+mod IO-FILE  is
+    including FILE .
+    including STD-STREAM .
+
+
+    ops class  cparse : -> Cid . 
+    ops fout fin cout : -> Oid .
+    ops text:_ : String -> Attribute .
+    op done : -> Attribute .
+    op pid : -> Oid . 
+
+    --- -----------------------------
+    vars filename mode : String .
+    vars handler : Oid .
+    vars S S'   : String .
+    var txt     : String .
+    --- -----------------------------
+
+    --- Reading from a file
+    op read-file : String -> Configuration .
+    eq read-file(filename) 
+      = <> 
+	< fin : class | text: "" > 
+	openFile(fileManager, fin, filename, "r") .
+
+    rl < fin : class | text: ""  >  fileError(fin, fileManager, s:String)
+      => < fin : class | text: "", done >  .
+    
+    rl < fin : class | text: ""  >  openedFile(fin, fileManager, handler) 
+      => < fin : class | text: "" >  getLine(handler, fin) .
+    
+    rl < fin : class | text: S > gotLine(fin, handler, S') 
+      =>
+      if S' == ""
+	then
+	  < fin : class | text: S >
+	  closeFile(handler , fin)
+	else 
+	  < fin : class | text: ( S + S') >
+	  getLine(handler, fin)
+	fi .
+    
+    rl  <> < fin : class | text: S > closedFile(fin,  handler)
+      => < pid : cparse | text: S, done > .
+endm
+
+eof
+
+--- Example
+erew read-file("misc/tests/anbn.txt") .
