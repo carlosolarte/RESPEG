@@ -71,6 +71,8 @@ and we shall simply write `maude` instead of `maude-CVC4.[linux64|darwin64]` to 
 
 `.maude` files are directly executed with the Maude engine. Hence, the command `$> maude file.maude` will execute the specification written in `file.maude`. 
 
+For the reviewing process, we have also created a Virtual Machine available [here](gdrive) (login=password=test). Maude is already installed there (just type `maude`) and this repository is cloned in `/home/test/RESPEG`. Please, do a `svn pull` to bring the last version of the files. 
+
 
 ## Structure of the project
 
