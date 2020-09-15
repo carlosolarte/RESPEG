@@ -169,3 +169,5 @@ rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 
 rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc") ) .  
 
 
+--- A simple example of cut
+rew parse( 'A <- "a" . ["b" . "c"]e / "a" . ["d"]e, 'A, str("abx")) .

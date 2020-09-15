@@ -19,7 +19,7 @@ mod PEG-SEMANTICS is
     --- ----------------
     --- States
     --- ----------------
-    --- Parsing states: < G ; p ; x >
+    --- Parsing states: G [p] x
     --- G is a grammar, p is a parsing expression and x a Str
 
     sort State .
@@ -38,6 +38,10 @@ mod PEG-SEMANTICS is
     vars tc tc'      : TChar .
     vars S S'        : State .
     --- ------------------------
+
+    --- --------------------
+    --- Semantic rules
+    --- --------------------
 
     rl [empty] : G [ emp ] x => x .
 

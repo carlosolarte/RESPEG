@@ -7,10 +7,6 @@
 --- the specification. This rewrite theory is then a refinement of the one in
 --- peg-rules.maude that exhibits a better performance
 
---- The semantic operators "copy" the whole information for the continuation.
---- This is later improved in peg-parser where more adjustments to the theory are
---- implement to gain efficiency
-
 load peg-syntax .    
 load io-ext .    
 
@@ -24,7 +20,7 @@ mod PEG-SEMANTICS is
     --- ----------------
     --- States
     --- ----------------
-    --- Parsing states: < G ; p ; x >
+    --- Parsing states: G [p] x
     --- G is a grammar, p is a PEG and s a string
 
     sort State .
@@ -64,6 +60,10 @@ mod PEG-SEMANTICS is
     vars S S'        : State .
     vars n  n'       : Nat .
     --- ------------------------
+
+    --- ----------------
+    --- SEMANTIC RULES
+    --- ---------------
 
     rl [empty] : G [ emp ] x  =>  x  .
 

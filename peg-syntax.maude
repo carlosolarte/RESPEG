@@ -15,11 +15,6 @@
 --- Concatenation of Maude's strings are renamed to ++ (to avoid
 --- conflicts with the symmbol + in PEGs)
 
---- Some considerations:
---- The initial rule must be names init
---- Lower case Qids are used to syntax-nonterminals
---- uppercase Qids are used to denote lexical rules
-
 fmod PEG-SYNTAX is
     pr EXT-BOOL .
     pr QID .

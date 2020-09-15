@@ -14,7 +14,11 @@ representation of PEG's rules, thus obtaining more efficient decision and verifi
 
 ## Getting Started
 This project was tested with [Maude
-3.0](http://maude.cs.illinois.edu/w/index.php/Maude_download_and_installation). In order to reproduce the experiments and data in the paper, no extra libraries or tools are needed. There is a simple [script](./examples/mutation) written in [Python3](https://python.org/) for automatically generating new benchmarks.
+3.0](http://maude.cs.illinois.edu/w/index.php/Maude_download_and_installation).
+In order to reproduce the experiments and data in the paper, besides the
+interpreter of Maude, no extra libraries or tools are needed. There is a simple
+[script](./examples/mutation) written in
+[Python3](https://python.org/) for automatically generating new benchmarks.
 
 The binary distribution of  [Core Maude
 3.0](http://maude.cs.illinois.edu/w/index.php/Maude_download_and_installation)
@@ -169,7 +173,13 @@ Maude> rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R
 result State: fail
 ```
 
-`rew` tells to Maude to rewrite the term until it reaches a normal form. For instance, in the first line, the term is `nil ["a" *] str("aabc")` denoting the parser-state `G [a*] aabc` where `G` is empty (no non-terminals are defined here). After applying the rules defining the semantics of PEGs, the final state is `"b" "c"` denoting the string (`bc`) not consumed by the expression. The string `eps` is the empty string and the state `fail` denotes a failure (the input string cannot be matched by the parsing expression). 
+`rew` tells Maude to rewrite the term until it reaches a normal form. For
+instance, in the first line, the term is `nil ["a" *] str("aabc")` denoting the
+parser-state `G [a*] aabc` where `G` is empty (no non-terminals are defined
+here). After applying the rules defining the semantics of PEGs, the final state
+is `"b" "c"` denoting the string (`bc`) not consumed by the expression. The
+string `eps` is the empty string and the state `fail` denotes a failure (the
+input string cannot be matched by the parsing expression). 
 
 ### peg-parser.maude
 
@@ -217,7 +227,21 @@ result State: fail(46)
 The function `parse` receives as parameter the grammar, the initial expression and the string to be recognized. The final state `{eps ; 48}` tells us that all the string was consumed and `48` rules where applied to reach that state. 
 On the other hand, the final state `fail(46)` indicates that the input string cannot be matched and the whole parser failed after `46` steps. 
 
-In grammars with cuts, it is also possible to observe final states of the form `error(n)`. This is a failure (similar to `fail`) but caused by a cut operator. The number `n` represents also the number of steps before failing. 
+In grammars with cuts, it is also possible to observe final states of the form
+`error(n)`. This is a failure (similar to `fail`) but caused by a cut operator.
+The number `n` represents also the number of steps before failing. 
+
+For instance, the following grammar fails with an `error` if the string starts with `a` but it does not continue with `bc`. On input `abx`, the failure on `x` does not produce a backtrack to consider the second branch of the choice (more details on Section 4 of our paper). 
+
+```
+Maude> rew parse( 'A <- "a" . ["b" . "c"]e / "d", 'A, str("abx")) .
+result State: error(8)
+
+--- without cuts, the second branch is (unnecessarily) visited after the failure on x
+Maude> rew parse( 'A <- "a" . "b" . "c" / "a" . "d", 'A, str("abx")) .
+result State: fail(10)
+```
+
 
 ### io-ext.maude
 Auxiliary functions to read and write files
@@ -230,11 +254,7 @@ In the directory `examples` there are some tests performed on different grammars
  - [pascal](./examples/pascal): comments in the style of Pascal
  - [c89](./examples/c89): Ansi C 89
  - [json](./examples/json): grammar for JSON
-<<<<<<< HEAD
- - [pallene](./examples/pallene): An extension of Lua. 
-=======
  - [pallene](./examples/pallene): An extension of Lua
->>>>>>> 31b5dd80cbdd716d3a2af0cc006485a02b5e9b30
 
 In each directory, the following files can be found: 
 
@@ -274,4 +294,4 @@ rewrites: 22074 in 226ms cpu (227ms real) (97472 rewrites/second)
 result State: {eps ; 7023}
 ```
 
-We have collected all the results and summarize it in `results.ods`. This sheet contains the final state of the parser for each input file as well as the number of steps performed to reach that state. These results are also reported in Table1 of our paper. Some minor differences are due to adjustments in the implementations performed after the submission of the paper (and will be included in the camera ready version). 
+We have collected all the results and summarize them in the `csv` files of each directory, containing the final state of the parser for each input file as well as the number of steps performed to reach that state. These results are also reported in Table1 of our paper. Some minor differences are due to adjustments in the implementations performed after the submission of the paper (and will be included in the camera ready version). 
