@@ -21,3 +21,8 @@ view Test from GRAMMAR-INPUT to G-INPUT is endv
 mod TEST is
     pr PEG-RULES-IO{Test} .
 endm
+
+eof
+
+--- example of use
+erew read-file("./yes//pascal1.pas") .

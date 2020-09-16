@@ -12,8 +12,6 @@ import argparse
 import os
 import sys
 
-
-
 class Conf:
     def __init__(self, nins, tins, ndel, tdel, nsubs, dsubs):
         ''' Parameters are:

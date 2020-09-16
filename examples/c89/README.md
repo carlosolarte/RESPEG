@@ -1,7 +1,8 @@
 # Grammar for C89
 
-The files `c89.maude` and  `c89-cut.maude` define the grammar for [c89](https://en.wikipedia.org/wiki/ANSI_C) with and
-without cuts. The grammar considers pre-processed C source files, i.e., inputs
+The files `c89.maude` and  `c89-cut.maude` define the grammar for
+[c89](https://en.wikipedia.org/wiki/ANSI_C) with and without cuts. The grammar
+considers pre-processed C source files, i.e., inputs
 without  pre-processor directives.
 
 ## Benchmark 1

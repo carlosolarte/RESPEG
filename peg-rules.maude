@@ -46,7 +46,8 @@ mod PEG-SEMANTICS is
     rl [empty] : G [ emp ] x => x .
 
 
-    rl [Terminal] :  G [ t ] tc x => if eq-t(t,tc)  then x else fail fi .
+    rl [Terminal] :  G [ t ] tc x 
+        => if eq-t(t,tc)  then x else fail fi .
 
     rl [Terminal] :  G [t] eps  => fail .
 
@@ -107,7 +108,7 @@ rew ('A <- "a" . "b")  [ 'A  ] "a" "b" "c" .
 rew ( ( 'A <- ( ("a" . ('A  . "b")) / emp ) )  ) [ 'A  ] str("ab") .
 rew ( ( 'A <- ( ("a" . ('A  . "b")) / emp ) )  ) [ 'A  ] str("abb") .
 
---- Only a^n b^n sequents 
+--- Only a^n b^n strings
 rew ( 'S <- 'A . ! [.] , 'A <- ("a" . 'A  . "b" ) / emp   ) [ 'S  ] "a" "a" "a" "b" "b" "b" .
 rew ( 'S <- 'A . ! [.] , 'A <- ("a" . 'A  . "b" ) / emp   ) [ 'S  ] "a" "a" "a" "b" "b" "b" "b" .
     
@@ -117,19 +118,13 @@ rew ( 'Z  <- "a" / "b" / "c" ) [ 'Z * . "d" . "e" ? ] "a" "c" "c" "b" "d" "e" .
 
 --- Comments of the form (* xxx *) ...
 rew ( 'Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End ) [ 'Comment  ] "(*" "a" "b" "b" "*)" .
---- 1.8seg
+--- 10 seg
 rew ( 'Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End ) [ 'Comment *  ] concat("(*", concat(str(" comment "), concat( "*)" , str(" Code outside comments"))))  .
---- 3.3 seg
-rew ( 'Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End ) [ 'Comment *  ] concat("(*",  concat( str("comment 1"), concat( "*)", concat( "(*", concat( str("comment 2"), concat( "*)",  str("Code outside comments")))))))  .
 
 --- a^n b^n c^n
 rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("abc") .
 rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aabbcc") .
 rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aabbc").
 rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aaabbbccc") .
---- 454ms
+--- 11seg
 rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aaaabbbbcccc") .
---- 30s
-rew ( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" ) [ 'S ] str("aaaaaabbbbbbcccccc") .
-
-

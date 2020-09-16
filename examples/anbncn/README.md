@@ -18,11 +18,13 @@ for different values of n.
 
 ## Non-valid inputs
 
-The directory ``` no/``` contains invalid inputs that result from mutations on the original files as described below. 
+The directory ``` no/``` contains invalid inputs that result from mutations on
+the original files as described below. 
 
 
 ### Deleting characters
-Generating 20 files per valid input file where 5 characters (a,b or c) are deleted. 
+Generating 20 files per valid input file where 5 characters (a,b or c) are
+deleted. 
 
 ```
 ../mutation/mutate.py --output "./no/del" --ndel 5 --delchar "a b c" --nfiles 20 --input "./yes/10-abc.txt"
@@ -30,8 +32,6 @@ Generating 20 files per valid input file where 5 characters (a,b or c) are delet
 ../mutation/mutate.py --output "./no/del" --ndel 5 --delchar "a b c" --nfiles 20 --input "./yes/100-abc.txt"
 ../mutation/mutate.py --output "./no/del" --ndel 5 --delchar "a b c" --nfiles 20 --input "./yes/500-abc.txt"
 ../mutation/mutate.py --output "./no/del" --ndel 5 --delchar "a b c" --nfiles 20 --input "./yes/1000-abc.txt"
-
-
 ```
 
 ### Inserting a character

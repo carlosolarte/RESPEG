@@ -1,4 +1,4 @@
----  Grammar for C89
+---  Grammar for C89 with cuts
 
 load ../../peg-parser-count .
     
@@ -73,17 +73,11 @@ fmod G-INPUT is
 	    'cast-exp              <-  strTok("(")  . 'type-name . [strTok(")")]e . 'cast-exp  /  'unary-exp,
 	    'unary-exp             <-  strTok("++") . ['unary-exp]e  /  strTok("--") . ['unary-exp]e  / 'unary-operator . ['cast-exp]e  /
 	    strTok("sizeof") . ( ( strTok("(") . 'type-name . strTok(")") ) / 'unary-exp)   / 'postfix-exp ,
-
-
 	    'postfix-exp           <-  'primary-exp . (strTok("[") . ['exp]e . [strTok("]")]e  /
 	      strTok("(") . ('assignment-exp . (strTok(",") . ['assignment-exp]e ) * ) ? . [strTok(")")]e  /
 	      strTok(".") . ['ID]e   /  strTok("->") . ['ID]e  /  strTok("++")  /  strTok("--")) *,
-
-
 	    'primary-exp           <-  'ID  /  'STRING  /  'constant  /  strTok("(") . 'exp . [strTok(")")]e,
 	    'constant              <-  'INT-CONST  /  'CHAR-CONST  /  'FLOAT-CONST  /  'ENUMERATION-CONST,
-
-
 	    'unary-operator        <-  strTok("&")  /  strTok("*")  /  strTok("+")  /  strTok("-")  /  strTok("~")  /  strTok("!"),
 	    'COMMENT               <-  strTok("/*") .  (! strTok("*/") . [.] ) * . [strTok("*/")]e ,
 	    'INT-CONST             <-  ( "0" .  'XDIGIT +  /  ! "0" . 'DIGIT . 'DIGIT *  /  "0" . [0-9] *) . 'SKIP, 
@@ -92,16 +86,9 @@ fmod G-INPUT is
 	    'XDIGIT                <- [0-9], 
 	    'DIGIT                 <- [0-9],
 	    'CHAR-CONST            <-  "'" . ([a-z]  /  ! "'" . [.]) .  "'", 
-
-
-
-
 	    'STRING                <-  strTok("\"") . (! "\"" . [.]  )* . strTok("\""), 
-
 	    'ENUMERATION-CONST     <-  'ID,
-
 	    'ID                    <-  (! 'KEYWORDS) . [a-zA-Z]  . [0-Z-]  * . 'SKIP,  
-
 	    'KEYWORDS              <-  (strTok'("auto")  /  strTok'("double")  /  strTok'("int")  /  strTok'("struct")  /
 	      strTok'("break")  /  strTok'("else")  /  strTok'("long")  /  strTok'("switch")  /
 	      strTok'("case")  /  strTok'("enum")  /  strTok'("register")  /  strTok'("typedef")  /
@@ -110,7 +97,6 @@ fmod G-INPUT is
 	      strTok'("continue")  /  strTok'("for")  /  strTok'("signed")  /  strTok'("void")  /
 	      strTok'("default")  /  strTok'("goto")  /  strTok'("sizeof")  /  strTok'("volatile")  /
 	      strTok'("do")  /  strTok'("if")  /  strTok'("static")  /  strTok'("while") ) . ! [0-Z] . 
-
 
 	  --- Initial expression
     op IE : -> Exp .
@@ -122,3 +108,8 @@ view Test from GRAMMAR-INPUT to G-INPUT is endv
 mod TEST is
     pr PEG-RULES-IO{Test} .
 endm
+eof
+
+--- Example of use
+erew read-file("./bench1/yes/trace.c") .
+

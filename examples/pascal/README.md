@@ -4,7 +4,9 @@ The files `pascal.maude` and  `pascal-cut.maude` define the grammar for
 comments in ISO 7185 and ISO 10206 Pascal with and without cuts.
 
 ## Valid files
-The input (valid) files are in the directory `./yes`. Those files were manually generated exploiting the fact that comments are allowed to be opened with `(* ` and closed with `}`.
+The input (valid) files are in the directory `./yes`. Those files were manually
+generated exploiting the fact that comments are allowed to be opened with `(* `
+and closed with `}`.
 
 
 ## Results

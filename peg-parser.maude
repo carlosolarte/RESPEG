@@ -2,8 +2,8 @@
 --- Semantics
 --- ----------
 
---- In this version, the CHOICE and NEG operators are defined in terms
---- of constructors on states. This avoids conditional rules in
+--- In this version, PEGs expressions are given meaning by means of
+--- constructors on states. This avoids conditional rules in
 --- the specification. This rewrite theory is then a refinement of the one in
 --- peg-rules.maude that exhibits a better performance
 
@@ -115,6 +115,7 @@ mod PEG-SEMANTICS is
 endm
 
 
+--- Facilities for reading inputs from files
 mod PEG-RULES-IO { X :: GRAMMAR-INPUT } is
     pr IO-FILE * (op __ : Configuration Configuration -> Configuration to join ) .
     pr PEG-SEMANTICS .
@@ -169,7 +170,5 @@ rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 
 rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaaabbbbcccc") ) .
 rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaaaaabbbbbbcccccc") ) .
 
-
--- 12ms
+--- 12ms
 rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc") ) .  
-

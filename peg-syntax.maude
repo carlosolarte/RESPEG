@@ -4,16 +4,13 @@
     
 --- This file defines the syntax for PEGs. Char (i.e., Maude Strings)
 --- are used to represent terminals and Qid are used to name
---- non-terminals. Constructors for the usual [0-9], [a-zA-Z] are
---- provided.
+--- non-terminals. Constructors for the usual [0-9], [a-zA-Z] character classes
+--- are also defined.
 
---- According to the precedences,
+--- According to the precedence,
 --- "a" / "b" . ! "c" . "d"  == ("a" / "b") . (! "c") . "d"
 
 --- Strings (inputs) are built by juxtaposition
-
---- Concatenation of Maude's strings are renamed to ++ (to avoid
---- conflicts with the symmbol + in PEGs)
 
 fmod PEG-SYNTAX is
     pr EXT-BOOL .

@@ -1,4 +1,4 @@
----  Example a^n b^n c^n
+--- Grammar for a^n b^n c^n with cuts
 
 load ../../peg-parser-count .
     

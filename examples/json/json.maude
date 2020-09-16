@@ -1,4 +1,4 @@
----  Example JSON
+---  Grammar for JSON
 
 load ../../peg-parser-count .
     
@@ -28,3 +28,9 @@ view Test from GRAMMAR-INPUT to G-INPUT is endv
 mod TEST is
     pr PEG-RULES-IO{Test} .
 endm
+
+eof
+
+--- Example of use
+erew read-file("./yes/4.json") .
+

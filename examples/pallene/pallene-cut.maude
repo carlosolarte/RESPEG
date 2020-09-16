@@ -1,4 +1,4 @@
----  Examples pallene
+---  Grammar for Pallene with cuts
 
 load ../../peg-parser-count .
     
@@ -77,3 +77,10 @@ view Test from GRAMMAR-INPUT to G-INPUT is endv
 mod TEST is
     pr PEG-RULES-IO{Test} .
 endm
+
+eof
+
+--- Example of use
+erew read-file("./yes//expression01.pallene") .
+
+

@@ -72,16 +72,11 @@ fmod G-INPUT is
 	    'cast-exp              <-  strTok("(")  . 'type-name . strTok(")") . 'cast-exp  /  'unary-exp,
 	    'unary-exp             <-  strTok("++") . 'unary-exp  /  strTok("--") . 'unary-exp  / 'unary-operator . 'cast-exp  /
 	    strTok("sizeof") . ( ( strTok("(") . 'type-name . strTok(")") ) / 'unary-exp)   / 'postfix-exp ,
-
-
 	    'postfix-exp           <-  'primary-exp . (strTok("[") . 'exp . strTok("]")  /
 	      strTok("(") . ('assignment-exp . (strTok(",") . 'assignment-exp ) * ) ? . strTok(")")  /
 	      strTok(".") . 'ID   /  strTok("->") . 'ID  /  strTok("++")  /  strTok("--")) *,
-
-
 	    'primary-exp           <-  'ID  /  'STRING  /  'constant  /  strTok("(") . 'exp . strTok(")"),
 	    'constant              <-  'INT-CONST  /  'CHAR-CONST  /  'FLOAT-CONST  /  'ENUMERATION-CONST,
-
 
 	    'unary-operator        <-  strTok("&")  /  strTok("*")  /  strTok("+")  /  strTok("-")  /  strTok("~")  /  strTok("!"),
 	    'COMMENT               <-  strTok("/*") .  (! strTok("*/") . [.] ) * . strTok("*/") ,
@@ -91,17 +86,10 @@ fmod G-INPUT is
 	    'XDIGIT                <- [0-9], 
 	    'DIGIT                 <- [0-9],
 	    'CHAR-CONST            <-  "'" . ([a-z]  /  ! "'" . [.]) .  "'", 
-
-
-
-	    
 	    'STRING                <-  strTok("\"") . (! "\"" . [.]  )* . strTok("\""), 
-	    
 	    'ESC-CHAR              <-  "XX", 
 	    'ENUMERATION-CONST     <-  'ID,
-	    
 	    'ID                    <-  (! 'KEYWORDS) . [a-zA-Z]  . [0-Z-]  * . 'SKIP,  
-    
 	    'KEYWORDS              <-  (strTok'("auto")  /  strTok'("double")  /  strTok'("int")  /  strTok'("struct")  /
 	      strTok'("break")  /  strTok'("else")  /  strTok'("long")  /  strTok'("switch")  /
 	      strTok'("case")  /  strTok'("enum")  /  strTok'("register")  /  strTok'("typedef")  /
@@ -121,3 +109,9 @@ view Test from GRAMMAR-INPUT to G-INPUT is endv
 mod TEST is
     pr PEG-RULES-IO{Test} .
 endm
+
+eof
+
+--- Example of use
+erew read-file("./bench1/yes/trace.c") .
+

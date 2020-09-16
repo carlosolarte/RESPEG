@@ -1,7 +1,7 @@
 --- ----------
 --- Semantics
 --- ----------
---- Extending peg-parser to count the number of steps before reaching a normal
+--- Extending peg-parser theory to count the number of steps before reaching a normal
 --- form
 
 load peg-syntax .    
@@ -37,8 +37,6 @@ mod PEG-SEMANTICS is
     --- Cuts
     op TRY : State -> State .
     op CATCH : State -> State .
-
-
 
     --- ------------------------
     vars G G'        : Grammar .
@@ -111,6 +109,7 @@ mod PEG-SEMANTICS is
 endm
 
 
+--- Facilities for reading the input from files
 mod PEG-RULES-IO { X :: GRAMMAR-INPUT } is
     pr IO-FILE .
     pr PEG-SEMANTICS .
@@ -167,7 +166,6 @@ rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 
 
 -- 12ms
 rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc") ) .  
-
 
 --- A simple example of cut
 rew parse( 'A <- "a" . ["b" . "c"]e / "a" . ["d"]e, 'A, str("abx")) .

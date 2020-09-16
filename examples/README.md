@@ -9,7 +9,7 @@ valid and invalid input files.
  - [json](./json): grammar for JSON
  - [pallene](./pallene): An extension of Lua. 
 
- In [mutation](./mutation) there is a simple script in Python3 to generate new
- benchmarks: invalid files from valid one by deleting, inserting and
+In [mutation](./mutation) there is a simple script in Python3 to generate new
+ benchmarks: invalid files from valid ones by deleting, inserting and
  substituting characters. 
 
