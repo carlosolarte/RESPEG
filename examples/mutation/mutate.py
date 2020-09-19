@@ -142,7 +142,9 @@ parser.add_argument('--nfiles', type=int, default="1",
 
 args=parser.parse_args()
 
-
-process(args)
+try:
+    process(args)
+except:
+    print("type python3 mutate.py --help for help.")
 
 #python3 mutate.py --output "." --input "anbncn.txt" --nins 1 --inschar "x,y,z" --ndel 2 --delchar "a,b,c" --nfiles 2 --nsubs 2 --sfrom "a,b" --sto "1,2" 

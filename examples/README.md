@@ -10,6 +10,6 @@ valid and invalid input files.
  - [pallene](./pallene): An extension of Lua. 
 
 In [mutation](./mutation) there is a simple script in Python3 to generate new
- benchmarks: invalid files from valid ones by deleting, inserting and
- substituting characters. 
+benchmarks: invalid files from valid ones by deleting, inserting and
+substituting characters. 
 

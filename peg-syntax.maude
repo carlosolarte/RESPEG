@@ -104,7 +104,7 @@ fmod PEG-SYNTAX is
     subsort TSymbol NTSymbol < Exp .
 
     
-    --- Ops on expressions
+    --- Operators on expressions
     --- Sequence
     op _._ : Exp Exp -> Exp [ctor gather(e E) prec 20] . 
     --- Ordered choice

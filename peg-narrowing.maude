@@ -1,6 +1,7 @@
----- Trying to avoid duplications in the unifiers. For that, the
----- structural axioms are omitted and the rules are written
----- explicitly with two variables
+--- Some experiments on using symbolic techniques to generate strings from
+--- grammars A simple constraint theory is defined in order to represent the
+--- characters that are valid in a given position of a string
+
 -----------
 --- SYNTAX
 -----------
@@ -9,6 +10,8 @@ load peg-syntax .
 fmod PEG-CONSTRAINT is
     pr NAT .
     pr PEG-SYNTAX .
+
+    --- Atomic constrains and constraints
 
     sort AConstraint Constraint .
     subsort TSymbol < AConstraint < Constraint .
@@ -30,6 +33,9 @@ fmod PEG-CONSTRAINT is
     subsort BConstraint < CStr .
     op nil : -> CStr .
     op {_} : Constraint -> BConstraint .
+
+    --- Simplifying constraints
+
     eq  ff /\ ac  =  ff  .
     eq  ff /\ ff  =  ff  .
     eq { c /\ ac /\ ac } = { c /\ ac }  .
@@ -51,6 +57,7 @@ fmod PEG-CONSTRAINT is
 
 endfm
 
+--- Semantics for PEGs based on symbolic states
 
 mod PEG-SEMANTICS is
     pr PEG-CONSTRAINT .
@@ -59,7 +66,6 @@ mod PEG-SEMANTICS is
     --- States
     --- ----------------
     --- Parsing states: < G ; p ; x >
-    --- G is a grammar, p is a PEG and s a string
 
     sort State .
     op _[_]_;_ : Grammar Exp CStr CStr -> State . 
@@ -106,9 +112,6 @@ mod PEG-SEMANTICS is
     eq conj(nil, y) = nil .
     eq conj({ c} . x , { c'} . y) = { c /\ c' } . conj(x, y) .
 
-
-
-
     --- ------------------------
     vars G G'        : Grammar .
     vars e e'        : Exp .
@@ -149,18 +152,6 @@ mod PEG-SEMANTICS is
     rl [Star] : STAR(ok(x,z) ,  G , e  , x', y'  ) => STAR( G [ e ] x ; nil ,  G ,  e , x, concat(y', z)) [ narrowing ] .
     rl [Star] : STAR(fail(x,y),  G , e  , x', y' ) => ok(conj(x', concat(y,x)), y') [ narrowing ] .
 
-    op json : -> Grammar .
-    eq json =
-	'json           <- 'value . 'EOF, 
-    'obj            <- strTok("{") . 'pair . (strTok(",") . 'pair) * . strTok("}") / strTok("{") . strTok("}"), 
-    'pair           <- 'STRING . strTok(":") . 'value,
-    'arr            <- strTok("[") . 'value . (strTok(",") . 'value)* . strTok("]") / strTok("[") . strTok("]") ,
-    'value          <- 'STRING / 'NUMBER / 'obj / 'arr / strTok("true") / strTok("false") / strTok("null"),
-    'STRING         <-  strTok("\"") . (! "\"" . [.])* . strTok("\"")  /  strTok("'") . (! "'" . [.])* . strTok("'"),
-    'NUMBER         <- "-" ? . [0-9]+ . ("." . ! "." . [0-9]*)? . 'SKIP, 
-    'EOF            <- 'SKIP . ! [.], 
-	'SKIP           <- ("\n" / " " / "\t" ) * 
-    .
 endm
 
 eof
@@ -189,17 +180,7 @@ search st( ( 'A <- ("a" . 'A . "b") / emp , 'B <- ("b" . 'B . "c") / emp , ('D <
 
 search st( ('Begin  <- "(*" , 'End <- "*)" , 'Body <- (! 'Begin . ! 'End . [.]) * , 'Comment <- 'Begin . 'Body  . 'End),  'Comment  , 6 ) =>* ok(x,y) .
 
-
-search json ['json] ({[0-9]} . {tt} . {tt}) ; nil  =>* ok(nil, x') .
-search st(json, 'json, 3) =>* ok(nil,y) .
-
-search [1] $st( [0-9] . "a", 2) =>* ok(nil, x) .
-
-search  $st( [0-9]+ . ("." . ( ! "." . [0-9])+)? . " "  , 3) =>* ok(x,y) .
-
-
 --- Comments Pascal
 search st( ('open <- "(" . "*" / "{", 'comment <- 'open .  (! 'close . [.]) * . 'close, 'close <- "*" . ")" / "}") , 'comment , 6) =>* ok(nil, x) .
---- C++
 
 

@@ -49,7 +49,6 @@ mod PEG-SEMANTICS is
     eq [Try] : TRY(fail) = error .
     eq [Try] : TRY(error) = error .
 
-
     --- ------------------------
     vars G G'        : Grammar .
     vars e e'        : Exp .
