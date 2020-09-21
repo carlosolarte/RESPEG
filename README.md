@@ -27,8 +27,8 @@ in the paper and the data collected on some benchmarks.
 
 This project was tested with [Maude
 3.0](http://maude.cs.illinois.edu/w/index.php/Maude_download_and_installation).
-In order to reproduce the experiments and data in the paper, besides the
-interpreter of Maude, no extra libraries or tools are needed. There is a simple
+No extra libraries or tools are needed for reproducing the experiments and data
+in the paper, besides the interpreter of Maude.  There is a simple
 [script](./examples/mutation) written in [Python3](https://python.org/) for
 automatically generating new benchmarks.
 
@@ -98,7 +98,7 @@ pull` to bring the last version of the files.
 In the following we describe the files of the project that correspond to the
 rewrite theories explained in our paper. In each case, we provide some simple
 examples. Some other examples are also included in the end of the files (after
-the command `eof`). More interesting, the directory `examples/` contains
+the command `eof`). More interestingly, the directory `examples/` contains
 concrete grammars of different programming languages (e.g., c89 and json) and
 sets of benchmarks showing how the introduction of cuts in the grammar may save
 some (unnecessary) backtracks. 
@@ -362,7 +362,7 @@ rewrites: 198 in 0ms cpu (0ms real) (613003 rewrites/second)
 result State: fail(46)
 ```
 
-We have collected all the results and summarize them in the `csv` files of each
+We have collected all the results and summarized them in the `csv` files of each
 directory, containing the final state of the parser for each input file as well
 as the number of steps performed to reach that state. These results are also
 reported in Table1 of our paper. Some minor differences are due to adjustments
