@@ -107,7 +107,7 @@ refer to the Maude's interpreter.
 `$> maude file.maude` executes the specification written in `file.maude`. 
 
 We have also created a Virtual Machine available
-[here](https://drive.google.com/file/d/18Rhz5IFJtiRcXmpceVNv_gYzgXfHh5VA/view?usp=sharing)
+[here](https://drive.google.com/file/d/1Qji2ZVCzhGS3GZmctNGKmSfikAMIcgg1/view?usp=sharing)
 (login=password=guest). Maude is already installed there (just type `maude`)
 and the present repository is cloned in `/home/guest/RESPEG`. Please, do a `git
 pull` to bring the last version of the files. 
@@ -395,7 +395,7 @@ MAUDE=maude
 
 specifies the location of the Maude interpreter. Once this variable is
 configured (e.g., it can be set to `/home/guest/maude/maude-CVC4.linux64`) add
-execute permissions and run the script to re-generate all the CSV file when
+execute permissions and run the script to re-generate all the CSV files when
 needed:
 
 ```
