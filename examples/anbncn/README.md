@@ -3,6 +3,7 @@
 The files `anbncn.maude` and  `anbncn-cut.maude` define the grammar for the
 language with and without cuts. The file `exec.maude` executes all the test on
 valid and non-valid inputs described below.
+
 ## Valid inputs 
 
 The valid input files are 
@@ -18,7 +19,7 @@ for different values of n.
 
 ## Non-valid inputs
 
-The directory ``` no/``` contains invalid inputs that result from mutations on
+The directory ``` ./no``` contains invalid inputs that result from mutations on
 the original files as described below. 
 
 

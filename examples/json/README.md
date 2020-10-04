@@ -7,11 +7,11 @@ and without cuts.
 ## Valid files
 The original (valid) JSON files where taken from [this
 repository](https://github.com/RichardHightower/json-parsers-benchmark).  The
-files are in the directory `./yes`
+files are in the directory `./yes`.
 
 
 ## Generating the benchmarks
-For each valid input file, 10 incorrect files are generated where at most 10
+For each valid input file, 10 incorrect files were generated where at most 10
 characters (`} ]`) are deleted. 
 
 

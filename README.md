@@ -17,10 +17,10 @@ rewrite theory that introduces more structure on the representation of PEG's
 rules, thus obtaining more efficient decision and verification procedures. The
 rewrite theories included here formalize also the notion of local and global
 cuts as described in our paper "*A semantic framework for PEGs*" (see a
-pre-camera-ready version of the paper [here](paper.pdf)). Cuts help the
-designer of the grammar to control the backtracks during parsing. The directory
-`examples/` contains the examples of grammars (with and without cuts) discussed
-in the paper and the data collected on some benchmarks. 
+pre-print of the paper [here](paper.pdf)). Cuts help the designer of the
+grammar to control the backtracks during parsing. The directory `examples/`
+contains the examples of grammars (with and without cuts) discussed in the
+paper and the data collected on some benchmarks. 
 
 
 ## Getting Started
@@ -56,7 +56,13 @@ term-order.maude
 smt.maude
 ```
 
-By executing `maude-CVC4.[linux64|darwin64]` you should observe the following:
+Execute permissions must be assigned to the file  `maude-CVC4.[linux64|darwin64]`:
+
+```
+$> chmod +x maude-CVC4.[linux64|darwin64]
+```
+
+After the  execution of  `maude-CVC4.[linux64|darwin64]`, you should observe the following:
 
 ```
 $> ./maude-CVC4.linux64
@@ -73,6 +79,20 @@ $> ./maude-CVC4.linux64
 To exit the Maude interpreter, type `quit . ` (mind the space and the `.`
 after `quit`). 
 
+In some Linux systems, the library `libtinfo.so.5` is needed to execute Maude.
+If Maude exists with a message similar to
+
+```
+error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory
+```
+
+please install `libtinfo5`. For instance, in Ubuntu, it suffices to type
+
+```
+$> sudo apt install libtinfo5
+```
+
+
 From now on, we shall assume that the executable above is included in your
 current `PATH` environment variable:
 
@@ -83,13 +103,13 @@ $> export PATH=$PATH:path-to-maude-directory
 and we shall simply write `maude` instead of `maude-CVC4.[linux64|darwin64]` to
 refer to the Maude's interpreter. 
 
-`.maude` files are directly executed with the Maude engine. Hence, the command `$> maude file.maude` will execute the specification written in `file.maude`. 
+`.maude` files are directly executed with the Maude engine. Hence, the command
+`$> maude file.maude` executes the specification written in `file.maude`. 
 
-For the reviewing process, we have also created a Virtual Machine Disk
-available
+We have also created a Virtual Machine available
 [here](https://drive.google.com/file/d/18Rhz5IFJtiRcXmpceVNv_gYzgXfHh5VA/view?usp=sharing)
 (login=password=guest). Maude is already installed there (just type `maude`)
-and the present repository is cloned in `/home/guest/RESPEG`. Please, do a `svn
+and the present repository is cloned in `/home/guest/RESPEG`. Please, do a `git
 pull` to bring the last version of the files. 
 
 
@@ -282,7 +302,7 @@ on `x` produces an error and the second alternative of the choice can be safely
 ignored (more details on Section 4 of our paper). 
 
 ```
-Maude> rew parse( 'A <- "a" . ["b" . "c"]e / "d", 'A, str("abx")) .
+Maude> rew parse( 'A <- "a" . try("b" . "c") / "d", 'A, str("abx")) .
 result State: error(8)
 
 --- without cuts, the second branch is (unnecessarily) visited after the failure on x
@@ -291,10 +311,9 @@ result State: fail(10)
 ```
 ### peg-narrowing.maude
 
-Section 5 of our paper describes a rewrite theory that can be used for symbolic
-analyses on PEGs. Such theory is implemented in the file `peg-narrowing.maude`.
-The PC-chairs suggested to remove this section in the Camera Ready version and
-we shall not discuss this file here.
+In the appendix of the paper we describe a preliminary attempt of using
+symbolic techniques to implement a derivative parser for PEGs. Such analyses
+are implemented in the file `peg-narrowing.maude`.
 
 ### io-ext.maude
 
@@ -365,7 +384,22 @@ result State: fail(46)
 We have collected all the results and summarized them in the `csv` files of each
 directory, containing the final state of the parser for each input file as well
 as the number of steps performed to reach that state. These results are also
-reported in Table1 of our paper. Some minor differences are due to adjustments
-in the implementation performed after the submission of the paper (and will be
-included in the camera ready version). 
+reported in Table1 of our paper. 
+
+The bash script `example/exec-all.sh` can be used to run all the benchmarks and
+generate the CSV files wit the results. Note that the line 7 of that script
+
+```
+MAUDE=maude
+```
+
+specifies the location of the Maude interpreter. Once this variable is
+configured (e.g., it can be set to `/home/guest/maude/maude-CVC4.linux64`) add
+execute permissions and run the script to re-generate all the CSV file when
+needed:
+
+```
+$> chmod + exec-all.sh
+$> ./exec-all.sh
+```
 
