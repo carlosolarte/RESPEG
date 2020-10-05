@@ -107,7 +107,7 @@ refer to the Maude's interpreter.
 `$> maude file.maude` executes the specification written in `file.maude`. 
 
 We have also created a Virtual Machine available
-[here](https://drive.google.com/file/d/1Qji2ZVCzhGS3GZmctNGKmSfikAMIcgg1/view?usp=sharing)
+[here](https://drive.google.com/uc?export=download&id=1Qji2ZVCzhGS3GZmctNGKmSfikAMIcgg1)
 (login=password=guest). Maude is already installed there (just type `maude`)
 and the present repository is cloned in `/home/guest/RESPEG`. Please, do a `git
 pull` to bring the last version of the files. 
