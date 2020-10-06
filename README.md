@@ -394,7 +394,7 @@ MAUDE=maude
 ```
 
 specifies the location of the Maude interpreter. Once this variable is
-configured (e.g., it can be set to `/home/guest/maude/maude-CVC4.linux64`) add
+configured (e.g., it can be set to `/home/guest/maude/maude-CVC4.linux64`), add
 execute permissions and run the script to re-generate all the CSV files when
 needed:
 

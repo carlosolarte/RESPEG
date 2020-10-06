@@ -5,7 +5,7 @@ and without cuts.
 
 
 ## Valid files
-The original (valid) JSON files where taken from [this
+The original (valid) JSON files were taken from [this
 repository](https://github.com/RichardHightower/json-parsers-benchmark).  The
 files are in the directory `./yes`.
 
