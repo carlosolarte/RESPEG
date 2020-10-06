@@ -155,7 +155,7 @@ Following the mechanism proposed in our paper (Section 4) for throwing and
 capturing errors in PEGs, valid expressions include also:
 
 ```
-p := [e]e | [e]c
+p := try(e) | catch(e)
 ```
 
 ### peg-rules.maude
@@ -268,8 +268,8 @@ result Str: eps
 ### peg-parser-count.maude
 
 This theory is similar to the previous one with the only difference that the
-state of the parser includes the number of steps performed (including
-backtracks) before reaching the final state. 
+state of the parser includes the number of steps performed before reaching the
+final state. 
 
 ```
 $> maude peg-parser-count
@@ -342,7 +342,7 @@ Using the Python3 script [mutation](./examples/mutation/mutate.py), we generate
 some non-valid inputs by deleting, inserting and substituting characters on the
 valid input files. Those files are stored in the directory `no/`. The file
 `anbncn.maude` defines the grammar for the language and `anbncn-cut.maude`
-introduces some cuts (i.e., expressions of the form `["b"]e`). The file
+introduces some cuts (i.e., expressions of the form `try("b")`). The file
 `exec.maude` loads both specifications and runs the tests on valid and
 non-valid input files:
 
@@ -384,10 +384,10 @@ result State: fail(46)
 We have collected all the results and summarized them in the `csv` files of each
 directory, containing the final state of the parser for each input file as well
 as the number of steps performed to reach that state. These results are also
-reported in Table1 of our paper. 
+reported in Section 4.5 of our paper. 
 
 The bash script `example/exec-all.sh` can be used to run all the benchmarks and
-generate the CSV files wit the results. Note that the line 7 of that script
+generate the CSV files with the results. Note that the line 7 of that script
 
 ```
 MAUDE=maude

@@ -131,8 +131,8 @@ fmod PEG-SYNTAX is
     eq ex[E] = E / throw .
 
     --- Deep cuts and catch
-    op [_]c : Exp -> Exp [ctor] . --- catch
-    op [_]e : Exp -> Exp [ctor] . --- try
+    op catch : Exp -> Exp [ctor] . --- catch
+    op try : Exp -> Exp [ctor] . --- try
 
     
     --- ------------------

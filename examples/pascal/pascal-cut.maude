@@ -9,7 +9,7 @@ fmod G-INPUT is
     eq G =
     'comment        <- 'open . (! 'close . [.])* . 'close,
 	'open           <- "(" . "*" / "{",
-    'close          <- "*" . [ ")" ]e / "}"
+    'close          <- "*" . try( ")" ) / "}"
     .
 	  --- Initial expression
     op IE : -> Exp .

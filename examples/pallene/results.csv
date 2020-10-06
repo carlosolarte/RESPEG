@@ -1,162 +1,162 @@
 File;Status;Steps;Status with cuts;Steps with cuts
-./yes//arraytype01.pallene;ok ;1465;ok ;1491
-./yes//arraytype02.pallene;ok ;2645;ok ;2695
-./yes//assign01.pallene;ok ;2740;ok ;2779
-./yes//comment01.pallene;ok ;322;ok ;325
-./yes//dowhile01.pallene;ok ;3838;ok ;3881
-./yes//expression01.pallene;ok ;1373;ok ;1398
-./yes//expression02.pallene;ok ;1387;ok ;1412
-./yes//expression03.pallene;ok ;1391;ok ;1416
-./yes//expression04.pallene;ok ;1409;ok ;1434
-./yes//expression05.pallene;ok ;1421;ok ;1446
-./yes//expression06.pallene;ok ;1479;ok ;1504
-./yes//expression07.pallene;ok ;1937;ok ;1974
-./yes//expression08.pallene;ok ;8521;ok ;8606
-./yes//expressionCall01.pallene;ok ;8641;ok ;8790
-./yes//expressionCall02.pallene;ok ;31753;ok ;32286
-./yes//expressionCall03.pallene;ok ;9801;ok ;9990
-./yes//expressionCall04.pallene;ok ;36393;ok ;37086
-./yes//expressionCall05.pallene;ok ;2857;ok ;2910
-./yes//expressionCall06.pallene;ok ;1863;ok ;1892
-./yes//expressionCall07.pallene;ok ;3085;ok ;3146
-./yes//expressionCall08.pallene;ok ;3147;ok ;3210
-./yes//expressionCall09.pallene;ok ;2143;ok ;2182
-./yes//expressionCall10.pallene;ok ;3365;ok ;3436
-./yes//expressionCast01.pallene;ok ;1782;ok ;1811
-./yes//expressionCast02.pallene;ok ;2223;ok ;2172
-./yes//expressionCast03.pallene;ok ;2226;ok ;2261
-./yes//expressionCast04.pallene;ok ;1937;ok ;1966
-./yes//expressionOp01.pallene;ok ;2125;ok ;2153
-./yes//expressionOp02.pallene;ok ;8795;ok ;8870
-./yes//expressionOp03.pallene;ok ;2376;ok ;2406
-./yes//expressionOp04.pallene;ok ;1972;ok ;1997
-./yes//expressionOp05.pallene;ok ;3482;ok ;3543
-./yes//expressionOp06.pallene;ok ;1857;ok ;1884
-./yes//expressionString01.pallene;ok ;1883;ok ;1908
-./yes//expressionString02.pallene;ok ;1572;ok ;1597
-./yes//expressionString03.pallene;ok ;1596;ok ;1621
-./yes//expressionString04.pallene;ok ;1620;ok ;1645
-./yes//expressionString05.pallene;ok ;1620;ok ;1645
-./yes//for01.pallene;ok ;3112;ok ;3158
-./yes//foreign01.pallene;ok ;1310;ok ;1329
-./yes//functiontype01.pallene;ok ;1685;ok ;1717
-./yes//functiontype02.pallene;ok ;1814;ok ;1670
-./yes//functiontype03.pallene;ok ;3390;ok ;2689
-./yes//functiontype04.pallene;ok ;1106;ok ;1035
-./yes//functiontype05.pallene;ok ;1279;ok ;1211
-./yes//functiontype06.pallene;ok ;1980;ok ;1926
-./yes//functiontype07.pallene;ok ;1477;ok ;1413
-./yes//functiontype08.pallene;ok ;2122;ok ;1688
-./yes//if01.pallene;ok ;1326;ok ;1351
-./yes//if02.pallene;ok ;1540;ok ;1568
-./yes//if03.pallene;ok ;1776;ok ;1804
-./yes//if04.pallene;ok ;1990;ok ;2021
-./yes//import01.pallene;ok ;1140;ok ;1161
-./yes//moduleMember01.pallene;ok ;9070;ok ;8509
-./yes//primitivetype01.pallene;ok ;667;ok ;675
-./yes//primitivetype02.pallene;ok ;875;ok ;889
-./yes//record01.pallene;ok ;1019;ok ;1039
-./yes//record02.pallene;ok ;2109;ok ;2153
-./yes//record03.pallene;ok ;1008;ok ;1028
-./yes//record04.pallene;ok ;1015;ok ;1035
-./yes//record05.pallene;ok ;1015;ok ;1035
-./yes//record06.pallene;ok ;1022;ok ;1042
-./yes//record07.pallene;ok ;3029;ok ;3068
-./yes//record08.pallene;ok ;5569;ok ;5672
-./yes//record09.pallene;ok ;3067;ok ;3108
-./yes//record10.pallene;ok ;2951;ok ;2992
-./yes//record11.pallene;ok ;2023;ok ;2062
-./yes//record12.pallene;ok ;2895;ok ;2768
-./yes//repeat01.pallene;ok ;1451;ok ;1479
-./yes//return01.pallene;ok ;1313;ok ;1343
-./yes//return02.pallene;ok ;1569;ok ;1603
-./yes//return03.pallene;ok ;1781;ok ;1815
-./yes//return04.pallene;ok ;1784;ok ;1818
-./yes//return05.pallene;ok ;2537;ok ;2584
-./yes//return06.pallene;ok ;2540;ok ;2587
-./yes//suffixOp01.pallene;ok ;4663;ok ;4745
-./yes//table01.pallene;ok ;2721;ok ;2778
-./yes//table02.pallene;ok ;3591;ok ;3636
-./yes//table03.pallene;ok ;3591;ok ;3636
-./yes//toplevelfunction01.pallene;ok ;815;ok ;834
-./yes//toplevelfunction02.pallene;ok ;1113;ok ;1139
-./yes//toplevelfunction03.pallene;ok ;1531;ok ;1567
-./yes//toplevelfunction04.pallene;ok ;1259;ok ;1293
-./yes//toplevelvar01.pallene;ok ;616;ok ;623
-./yes//toplevelvar02.pallene;ok ;578;ok ;585
-./yes//vardec01.pallene;ok ;1627;ok ;1654
-./yes//while01.pallene;ok ;1280;ok ;1308
-./no//assignAssign01.pallene;fail;1069;error;976
-./no//assignFor01.pallene;fail;928;error;835
-./no//assignLocal01.pallene;fail;998;error;908
-./no//assignVar01.pallene;fail;204;error;175
-./no//castMissingType01.pallene;fail;2035;error;1954
-./no//colonRecordField01.pallene;fail;447;error;430
-./no//commaFor01.pallene;fail;1163;error;1070
-./no//declFor01.pallene;fail;894;error;801
-./no//declLocal01.pallene;fail;965;error;875
-./no//declLocal02.pallene;fail;960;error;870
-./no//declLocal03.pallene;fail;839;error;748
-./no//declLocal04.pallene;fail;960;error;870
-./no//declParList01.pallene;fail;1107;error;764
-./no//declParList02.pallene;fail;857;error;675
-./no//doFor01.pallene;fail;1639;error;1546
-./no//doWhile01.pallene;fail;1965;error;1508
-./no//endBlock01.pallene;fail;1751;error;1540
-./no//endFor01.pallene;fail;2300;error;2216
-./no//endFunc01.pallene;fail;1189;error;1096
-./no//endFunc02.pallene;fail;1488;error;1407
-./no//endFunc03.pallene;fail;2370;error;2298
-./no//endIf01.pallene;fail;3791;error;3738
-./no//endRecord01.pallene;fail;839;error;832
-./no//endWhile01.pallene;fail;3932;error;3503
-./no//exp1For01.pallene;fail;1469;error;1388
-./no//exp2For01.pallene;fail;1395;error;1306
-./no//exp3For01.pallene;fail;1635;error;1546
-./no//expAssign01.pallene;fail;2515;error;2446
-./no//expAssign02.pallene;fail;1514;error;1433
-./no//expAssign03.pallene;fail;1376;error;1291
-./no//expElseIf01.pallene;fail;4607;error;4581
-./no//expExpList01.pallene;fail;1791;error;1341
-./no//expExpList02.pallene;fail;4080;error;1833
-./no//expExpSuf01.pallene;fail;3112;error;1611
-./no//expFieldList01.pallene;fail;4086;error;2088
-./no//expIf01.pallene;fail;1304;error;1223
-./no//expLocal01.pallene;fail;1294;error;1212
-./no//expRepeat01.pallene;fail;2922;error;2864
-./no//expSimpleExp01.pallene;fail;3786;error;3753
-./no//expStat01.pallene;fail;2599;error;2522
-./no//expStat02.pallene;fail;1075;error;982
-./no//expVarDec01.pallene;fail;747;fail;763
-./no//expVarList01.pallene;fail;1286;error;1032
-./no//expWhile01.pallene;fail;1185;error;718
-./no//fieldRecord01.pallene;fail;350;error;332
-./no//funcArgsExpSuf01.pallene;fail;2374;error;1223
-./no//lParPList01.pallene;fail;315;error;207
-./no//nameColonExpSuf01.pallene;fail;2276;error;1175
-./no//nameDotExpSuf01.pallene;fail;2261;error;1179
-./no//nameFunc01.pallene;fail;247;error;139
-./no//nameFunc02.pallene;fail;274;error;166
-./no//nameImport01.pallene;fail;473;fail;482
-./no//nameRecord01.pallene;fail;286;error;266
-./no//opExp01.pallene;fail;1792;error;1713
-./no//paramSemicolon01.pallene;fail;451;error;347
-./no//rBracketExpSuf01.pallene;fail;2490;error;1288
-./no//rCurlyInitList01.pallene;fail;2792;error;1426
-./no//rCurlyType01.pallene;fail;1396;error;1093
-./no//rParFuncArgs01.pallene;fail;3024;error;2945
-./no//rParImport01.pallene;fail;1158;error;800
-./no//rParPList01.pallene;fail;442;error;338
-./no//rParSimpleExp01.pallene;fail;2558;error;2477
-./no//rParenTypelist01.pallene;fail;1670;error;932
-./no//stringImport01.pallene;fail;1076;error;718
-./no//stringLParImport01.pallene;fail;1100;error;742
-./no//thenElseIf01.pallene;fail;5571;error;5547
-./no//thenIf01.pallene;fail;1804;error;1724
-./no//typeDecl01.pallene;fail;742;error;552
-./no//typeFunc01.pallene;fail;1070;error;606
-./no//typeRecordField01.pallene;fail;666;error;654
-./no//typeReturnTypes01.pallene;fail;1782;error;1311
-./no//typeType01.pallene;fail;1376;error;1073
-./no//typelistType01.pallene;fail;1419;error;675
-./no//untilRepeat01.pallene;fail;2427;error;2358
+./yes//arraytype01.pallene ; eps ; 1465 ; eps ; 1491
+./yes//arraytype02.pallene ; eps ; 2645 ; eps ; 2695
+./yes//assign01.pallene ; eps ; 2740 ; eps ; 2779
+./yes//comment01.pallene ; eps ; 322 ; eps ; 325
+./yes//dowhile01.pallene ; eps ; 3838 ; eps ; 3881
+./yes//expression01.pallene ; eps ; 1373 ; eps ; 1398
+./yes//expression02.pallene ; eps ; 1387 ; eps ; 1412
+./yes//expression03.pallene ; eps ; 1391 ; eps ; 1416
+./yes//expression04.pallene ; eps ; 1409 ; eps ; 1434
+./yes//expression05.pallene ; eps ; 1421 ; eps ; 1446
+./yes//expression06.pallene ; eps ; 1479 ; eps ; 1504
+./yes//expression07.pallene ; eps ; 1937 ; eps ; 1974
+./yes//expression08.pallene ; eps ; 8521 ; eps ; 8606
+./yes//expressionCall01.pallene ; eps ; 8641 ; eps ; 8790
+./yes//expressionCall02.pallene ; eps ; 31753 ; eps ; 32286
+./yes//expressionCall03.pallene ; eps ; 9801 ; eps ; 9990
+./yes//expressionCall04.pallene ; eps ; 36393 ; eps ; 37086
+./yes//expressionCall05.pallene ; eps ; 2857 ; eps ; 2910
+./yes//expressionCall06.pallene ; eps ; 1863 ; eps ; 1892
+./yes//expressionCall07.pallene ; eps ; 3085 ; eps ; 3146
+./yes//expressionCall08.pallene ; eps ; 3147 ; eps ; 3210
+./yes//expressionCall09.pallene ; eps ; 2143 ; eps ; 2182
+./yes//expressionCall10.pallene ; eps ; 3365 ; eps ; 3436
+./yes//expressionCast01.pallene ; eps ; 1782 ; eps ; 1811
+./yes//expressionCast02.pallene ; eps ; 2223 ; eps ; 2172
+./yes//expressionCast03.pallene ; eps ; 2226 ; eps ; 2261
+./yes//expressionCast04.pallene ; eps ; 1937 ; eps ; 1966
+./yes//expressionOp01.pallene ; eps ; 2125 ; eps ; 2153
+./yes//expressionOp02.pallene ; eps ; 8795 ; eps ; 8870
+./yes//expressionOp03.pallene ; eps ; 2376 ; eps ; 2406
+./yes//expressionOp04.pallene ; eps ; 1972 ; eps ; 1997
+./yes//expressionOp05.pallene ; eps ; 3482 ; eps ; 3543
+./yes//expressionOp06.pallene ; eps ; 1857 ; eps ; 1884
+./yes//expressionString01.pallene ; eps ; 1883 ; eps ; 1908
+./yes//expressionString02.pallene ; eps ; 1572 ; eps ; 1597
+./yes//expressionString03.pallene ; eps ; 1596 ; eps ; 1621
+./yes//expressionString04.pallene ; eps ; 1620 ; eps ; 1645
+./yes//expressionString05.pallene ; eps ; 1620 ; eps ; 1645
+./yes//for01.pallene ; eps ; 3112 ; eps ; 3158
+./yes//foreign01.pallene ; eps ; 1310 ; eps ; 1329
+./yes//functiontype01.pallene ; eps ; 1685 ; eps ; 1717
+./yes//functiontype02.pallene ; eps ; 1814 ; eps ; 1670
+./yes//functiontype03.pallene ; eps ; 3390 ; eps ; 2689
+./yes//functiontype04.pallene ; eps ; 1106 ; eps ; 1035
+./yes//functiontype05.pallene ; eps ; 1279 ; eps ; 1211
+./yes//functiontype06.pallene ; eps ; 1980 ; eps ; 1926
+./yes//functiontype07.pallene ; eps ; 1477 ; eps ; 1413
+./yes//functiontype08.pallene ; eps ; 2122 ; eps ; 1688
+./yes//if01.pallene ; eps ; 1326 ; eps ; 1351
+./yes//if02.pallene ; eps ; 1540 ; eps ; 1568
+./yes//if03.pallene ; eps ; 1776 ; eps ; 1804
+./yes//if04.pallene ; eps ; 1990 ; eps ; 2021
+./yes//import01.pallene ; eps ; 1140 ; eps ; 1161
+./yes//moduleMember01.pallene ; eps ; 9070 ; eps ; 8509
+./yes//primitivetype01.pallene ; eps ; 667 ; eps ; 675
+./yes//primitivetype02.pallene ; eps ; 875 ; eps ; 889
+./yes//record01.pallene ; eps ; 1019 ; eps ; 1039
+./yes//record02.pallene ; eps ; 2109 ; eps ; 2153
+./yes//record03.pallene ; eps ; 1008 ; eps ; 1028
+./yes//record04.pallene ; eps ; 1015 ; eps ; 1035
+./yes//record05.pallene ; eps ; 1015 ; eps ; 1035
+./yes//record06.pallene ; eps ; 1022 ; eps ; 1042
+./yes//record07.pallene ; eps ; 3029 ; eps ; 3068
+./yes//record08.pallene ; eps ; 5569 ; eps ; 5672
+./yes//record09.pallene ; eps ; 3067 ; eps ; 3108
+./yes//record10.pallene ; eps ; 2951 ; eps ; 2992
+./yes//record11.pallene ; eps ; 2023 ; eps ; 2062
+./yes//record12.pallene ; eps ; 2895 ; eps ; 2768
+./yes//repeat01.pallene ; eps ; 1451 ; eps ; 1479
+./yes//return01.pallene ; eps ; 1313 ; eps ; 1343
+./yes//return02.pallene ; eps ; 1569 ; eps ; 1603
+./yes//return03.pallene ; eps ; 1781 ; eps ; 1815
+./yes//return04.pallene ; eps ; 1784 ; eps ; 1818
+./yes//return05.pallene ; eps ; 2537 ; eps ; 2584
+./yes//return06.pallene ; eps ; 2540 ; eps ; 2587
+./yes//suffixOp01.pallene ; eps ; 4663 ; eps ; 4745
+./yes//table01.pallene ; eps ; 2721 ; eps ; 2778
+./yes//table02.pallene ; eps ; 3591 ; eps ; 3636
+./yes//table03.pallene ; eps ; 3591 ; eps ; 3636
+./yes//toplevelfunction01.pallene ; eps ; 815 ; eps ; 834
+./yes//toplevelfunction02.pallene ; eps ; 1113 ; eps ; 1139
+./yes//toplevelfunction03.pallene ; eps ; 1531 ; eps ; 1567
+./yes//toplevelfunction04.pallene ; eps ; 1259 ; eps ; 1293
+./yes//toplevelvar01.pallene ; eps ; 616 ; eps ; 623
+./yes//toplevelvar02.pallene ; eps ; 578 ; eps ; 585
+./yes//vardec01.pallene ; eps ; 1627 ; eps ; 1654
+./yes//while01.pallene ; eps ; 1280 ; eps ; 1308
+./no//assignAssign01.pallene ; fail ; 1069 ; error ; 976
+./no//assignFor01.pallene ; fail ; 928 ; error ; 835
+./no//assignLocal01.pallene ; fail ; 998 ; error ; 908
+./no//assignVar01.pallene ; fail ; 204 ; error ; 175
+./no//castMissingType01.pallene ; fail ; 2035 ; error ; 1954
+./no//colonRecordField01.pallene ; fail ; 447 ; error ; 430
+./no//commaFor01.pallene ; fail ; 1163 ; error ; 1070
+./no//declFor01.pallene ; fail ; 894 ; error ; 801
+./no//declLocal01.pallene ; fail ; 965 ; error ; 875
+./no//declLocal02.pallene ; fail ; 960 ; error ; 870
+./no//declLocal03.pallene ; fail ; 839 ; error ; 748
+./no//declLocal04.pallene ; fail ; 960 ; error ; 870
+./no//declParList01.pallene ; fail ; 1107 ; error ; 764
+./no//declParList02.pallene ; fail ; 857 ; error ; 675
+./no//doFor01.pallene ; fail ; 1639 ; error ; 1546
+./no//doWhile01.pallene ; fail ; 1965 ; error ; 1508
+./no//endBlock01.pallene ; fail ; 1751 ; error ; 1540
+./no//endFor01.pallene ; fail ; 2300 ; error ; 2216
+./no//endFunc01.pallene ; fail ; 1189 ; error ; 1096
+./no//endFunc02.pallene ; fail ; 1488 ; error ; 1407
+./no//endFunc03.pallene ; fail ; 2370 ; error ; 2298
+./no//endIf01.pallene ; fail ; 3791 ; error ; 3738
+./no//endRecord01.pallene ; fail ; 839 ; error ; 832
+./no//endWhile01.pallene ; fail ; 3932 ; error ; 3503
+./no//exp1For01.pallene ; fail ; 1469 ; error ; 1388
+./no//exp2For01.pallene ; fail ; 1395 ; error ; 1306
+./no//exp3For01.pallene ; fail ; 1635 ; error ; 1546
+./no//expAssign01.pallene ; fail ; 2515 ; error ; 2446
+./no//expAssign02.pallene ; fail ; 1514 ; error ; 1433
+./no//expAssign03.pallene ; fail ; 1376 ; error ; 1291
+./no//expElseIf01.pallene ; fail ; 4607 ; error ; 4581
+./no//expExpList01.pallene ; fail ; 1791 ; error ; 1341
+./no//expExpList02.pallene ; fail ; 4080 ; error ; 1833
+./no//expExpSuf01.pallene ; fail ; 3112 ; error ; 1611
+./no//expFieldList01.pallene ; fail ; 4086 ; error ; 2088
+./no//expIf01.pallene ; fail ; 1304 ; error ; 1223
+./no//expLocal01.pallene ; fail ; 1294 ; error ; 1212
+./no//expRepeat01.pallene ; fail ; 2922 ; error ; 2864
+./no//expSimpleExp01.pallene ; fail ; 3786 ; error ; 3753
+./no//expStat01.pallene ; fail ; 2599 ; error ; 2522
+./no//expStat02.pallene ; fail ; 1075 ; error ; 982
+./no//expVarDec01.pallene ; fail ; 747 ; fail ; 763
+./no//expVarList01.pallene ; fail ; 1286 ; error ; 1032
+./no//expWhile01.pallene ; fail ; 1185 ; error ; 718
+./no//fieldRecord01.pallene ; fail ; 350 ; error ; 332
+./no//funcArgsExpSuf01.pallene ; fail ; 2374 ; error ; 1223
+./no//lParPList01.pallene ; fail ; 315 ; error ; 207
+./no//nameColonExpSuf01.pallene ; fail ; 2276 ; error ; 1175
+./no//nameDotExpSuf01.pallene ; fail ; 2261 ; error ; 1179
+./no//nameFunc01.pallene ; fail ; 247 ; error ; 139
+./no//nameFunc02.pallene ; fail ; 274 ; error ; 166
+./no//nameImport01.pallene ; fail ; 473 ; fail ; 482
+./no//nameRecord01.pallene ; fail ; 286 ; error ; 266
+./no//opExp01.pallene ; fail ; 1792 ; error ; 1713
+./no//paramSemicolon01.pallene ; fail ; 451 ; error ; 347
+./no//rBracketExpSuf01.pallene ; fail ; 2490 ; error ; 1288
+./no//rCurlyInitList01.pallene ; fail ; 2792 ; error ; 1426
+./no//rCurlyType01.pallene ; fail ; 1396 ; error ; 1093
+./no//rParFuncArgs01.pallene ; fail ; 3024 ; error ; 2945
+./no//rParImport01.pallene ; fail ; 1158 ; error ; 800
+./no//rParPList01.pallene ; fail ; 442 ; error ; 338
+./no//rParSimpleExp01.pallene ; fail ; 2558 ; error ; 2477
+./no//rParenTypelist01.pallene ; fail ; 1670 ; error ; 932
+./no//stringImport01.pallene ; fail ; 1076 ; error ; 718
+./no//stringLParImport01.pallene ; fail ; 1100 ; error ; 742
+./no//thenElseIf01.pallene ; fail ; 5571 ; error ; 5547
+./no//thenIf01.pallene ; fail ; 1804 ; error ; 1724
+./no//typeDecl01.pallene ; fail ; 742 ; error ; 552
+./no//typeFunc01.pallene ; fail ; 1070 ; error ; 606
+./no//typeRecordField01.pallene ; fail ; 666 ; error ; 654
+./no//typeReturnTypes01.pallene ; fail ; 1782 ; error ; 1311
+./no//typeType01.pallene ; fail ; 1376 ; error ; 1073
+./no//typelistType01.pallene ; fail ; 1419 ; error ; 675
+./no//untilRepeat01.pallene ; fail ; 2427 ; error ; 2358

@@ -53,10 +53,11 @@ exec_benchmark(){
 
     i=1
 
+    # Adding the file names
     while read line
     do
         f=`echo $line | sed 's/.*\"\(.*\)\".*/\1/'`
-        result+=("$f ; ")
+        result+=("$f")
         let i+=1
         if [ "$i" -gt "$nfiles" ];then
             break
@@ -64,6 +65,7 @@ exec_benchmark(){
     done < <(grep erew $FILEEXEC)
 
 
+    # Adding the results
     i=1
     while read line
     do
@@ -87,10 +89,10 @@ exec_benchmark(){
         if [ "$i" -gt "$nfiles" ];then
             # With cuts
             idx=$( expr $i - $nfiles )
-            result[$idx]="${result[$idx]} $r"
+            result[$idx]="${result[$idx]} ; $r"
         else
             # Without cuts
-            result[$i]="${result[$i]} $r"
+            result[$i]="${result[$i]} ; $r"
         fi
         let i+=1
     done < <($MAUDE $FILEEXEC | grep result)
@@ -107,10 +109,10 @@ exec_benchmark(){
 # Running all the benchmarks
 ############################
 
-exec_benchmark "./pascal/exec.maude" "./pascal/results.csv"
-exec_benchmark "./json/exec.maude" "./json/results.csv"
-exec_benchmark "./c89/exec-bench1.maude" "./c89/results1.csv"
-exec_benchmark "./c89/exec-bench2.maude" "./c89/results2.csv"
-exec_benchmark "./pallene/exec.maude" "./pallene/results.csv"
+exec_benchmark "./pascal/exec.maude" "./pascal/results.csv" 
+exec_benchmark "./json/exec.maude" "./json/results.csv"  
+exec_benchmark "./c89/exec-bench1.maude" "./c89/results1.csv" 
+exec_benchmark "./c89/exec-bench2.maude" "./c89/results2.csv"  
+exec_benchmark "./pallene/exec.maude" "./pallene/results.csv"  
 exec_benchmark "./anbncn/exec.maude" "./anbncn/results.csv"
 

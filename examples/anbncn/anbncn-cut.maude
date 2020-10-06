@@ -8,8 +8,8 @@ fmod G-INPUT is
     op G : -> Grammar .
     eq G =
 	'S <- ( &('R1  . "c") ) . "a" + . 'R2 . 'I . ! [.] ,
-	'R1 <- "a" . ('R1 ?) . ["b"]e,
-	'R2 <- "b" . ('R2 ?) . ["c"]e, 
+	'R1 <- "a" . ('R1 ?) . try("b"),
+	'R2 <- "b" . ('R2 ?) . try("c"), 
 	'I <- "\n" .
     
     --- Initial expression

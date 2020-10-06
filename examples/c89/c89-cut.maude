@@ -17,8 +17,8 @@ fmod G-INPUT is
 
 	'type-spec             <-  strTok("void")  /  strTok("char")  /  strTok("short")  /  strTok("int")  /
 	strTok("long")  / strTok("float")  / strTok("double")  /  strTok("signed")  /  strTok("unsigned")  /
-	'typedef-name  / strTok("enum") . 'ID ? . strTok("{") .  'enumerator .  (strTok(",") . ['enumerator]e ) * . [strTok("}")]e /
-	strTok("enum") . 'ID  / 'struct-or-union . 'ID ? . strTok("{") . ['struct-decl +]e . [strTok("}")]e /
+	'typedef-name  / strTok("enum") . 'ID ? . strTok("{") .  'enumerator .  (strTok(",") . try('enumerator) ) * . try(strTok("}")) /
+	strTok("enum") . 'ID  / 'struct-or-union . 'ID ? . strTok("{") . try('struct-decl +) . try(strTok("}")) /
 	'struct-or-union . 'ID ,
 	'type-qualifier        <-  strTok("const")  /  strTok("volatile") ,
 	'struct-or-union       <-  strTok("struct")  /  strTok("union"),
@@ -28,58 +28,58 @@ fmod G-INPUT is
 	'spec-qualifier-list   <-  ('type-spec  /  'type-qualifier) +,
 	'spec-qualifier        <-  'type-spec  /  'type-qualifier,
 	'struct-declarator     <-  'declarator ? . strTok(":") . 'const-exp  /  'declarator,
-	'enumerator            <-  'ID . strTok("=") . ['const-exp]e  /  'ID,
+	'enumerator            <-  'ID . strTok("=") . try('const-exp)  /  'ID,
 	'declarator            <-  'pointer ? . 'direct-declarator,
 	'direct-declarator     <-  ('ID  /  strTok("(") . 'declarator . strTok(")")) . (strTok("[") . 'const-exp ? . strTok("]")  / strTok("(") . 'param-type-list . strTok(")")  / strTok("(") . 'id-list ? . strTok(")") ) *,
 	'pointer               <-  strTok("*") . 'type-qualifier * . 'pointer  /  strTok("*") . 'type-qualifier *,
 	'param-type-list       <-  'param-decl . (strTok(",") . 'param-decl ) * . (strTok(",") . strTok("...") ) ? ,
 	'param-decl            <-  'decl-spec + .  ('declarator  /  'abstract-declarator) ?,
 	'id-list               <-  'ID . (strTok(",") . 'ID ) * ,
-	'initializer           <-  strTok("{") . 'initializer . (strTok(",") . 'initializer ) * . strTok(",") ? . [strTok("}")]e  / 'assignment-exp,
+	'initializer           <-  strTok("{") . 'initializer . (strTok(",") . 'initializer ) * . strTok(",") ? . try(strTok("}"))  / 'assignment-exp,
 	'type-name             <-  'spec-qualifier-list . 'abstract-declarator ?,
 	'abstract-declarator   <-  'pointer  /  'pointer ? . 'direct-abstract-declarator,
-	'direct-abstract-declarator <- strTok("(") . 'abstract-declarator . [strTok(")")]e . (strTok("[") . 'const-exp ? . [strTok("]")]e  / strTok("(") . 'param-type-list ? . [strTok(")")]e) *,
+	'direct-abstract-declarator <- strTok("(") . 'abstract-declarator . try(strTok(")")) . (strTok("[") . 'const-exp ? . try(strTok("]"))  / strTok("(") . 'param-type-list ? . try(strTok(")"))) *,
 	'typedef-name          <-  'ID,
 	'stat                  <-  'ID . strTok(":") . 'stat / 
-    strTok("case") . ['const-exp]e . [strTok(":")]e . ['stat]e   /
-	strTok("default") . [strTok(":")]e .  ['stat]e  / 'exp ? .  strTok(";")  / 'compound-stat /
-	strTok("if") . [strTok("(")]e . ['exp]e . [strTok(")")]e . ['stat]e . strTok("else") . ['stat]e /
-	strTok("if") .  [strTok("(")]e .  ['exp]e . [strTok(")")]e . ['stat]e /
-	    strTok("switch") . [strTok("(")]e . ['exp]e . [strTok(")")]e . ['stat]e /
-	    strTok("while") . [strTok("(")]e . ['exp]e . [strTok(")")]e . ['stat]e /
-	    strTok("do") .  ['stat]e .  [strTok("while")]e . [strTok("(")]e .  ['exp]e  . [strTok(")")]e . [strTok(";")]e /
-	    strTok("for") . [strTok("(")]e . 'exp ? . [strTok(";")]e . 'exp ? . [strTok(";")]e . 'exp ? . [strTok(")")]e . 'stat  /
-	    strTok("goto") . ['ID]e  . [strTok(";")]e /
-	    strTok("continue") . [strTok(";")]e /
-	    strTok("break") . [strTok(";")]e /
-	    strTok("return") . 'exp ? . [strTok(";")]e ,
-	    'compound-stat         <-  strTok("{") .  'decl * .  'stat * .  [strTok("}")]e,
-	    'exp                   <-  'assignment-exp . (strTok(",") . ['assignment-exp]e) *,
+    strTok("case") . try('const-exp) . try(strTok(":")) . try('stat)   /
+	strTok("default") . try(strTok(":")) .  try('stat)  / 'exp ? .  strTok(";")  / 'compound-stat /
+	strTok("if") . try(strTok("(")) . try('exp) . try(strTok(")")) . try('stat) . strTok("else") . try('stat) /
+	strTok("if") .  try(strTok("(")) .  try('exp) . try(strTok(")")) . try('stat) /
+	    strTok("switch") . try(strTok("(")) . try('exp) . try(strTok(")")) . try('stat) /
+	    strTok("while") . try(strTok("(")) . try('exp) . try(strTok(")")) . try('stat) /
+	    strTok("do") .  try('stat) .  try(strTok("while")) . try(strTok("(")) .  try('exp)  . try(strTok(")")) . try(strTok(";")) /
+	    strTok("for") . try(strTok("(")) . 'exp ? . try(strTok(";")) . 'exp ? . try(strTok(";")) . 'exp ? . try(strTok(")")) . 'stat  /
+	    strTok("goto") . try('ID)  . try(strTok(";")) /
+	    strTok("continue") . try(strTok(";")) /
+	    strTok("break") . try(strTok(";")) /
+	    strTok("return") . 'exp ? . try(strTok(";")) ,
+	    'compound-stat         <-  strTok("{") .  'decl * .  'stat * .  try(strTok("}")),
+	    'exp                   <-  'assignment-exp . (strTok(",") . try('assignment-exp)) *,
 	    'assignment-exp        <-  'unary-exp . 'assignment-operator . 'assignment-exp  / 'conditional-exp,
 	    'assignment-operator   <-  strTok("=") . ! "="  /  strTok("*=")  /  strTok("/=")  / strTok("%=") /  strTok("+=")  /  strTok("-=")  /
 	    strTok("<<=")  /  strTok(">>=")  /  strTok("&=")  /  strTok("^=")  /  strTok("|="),
-	    'conditional-exp       <-  'logical-or-exp . strTok("?") . ['exp]e .  [strTok(":")]e . ['conditional-exp]e  / 'logical-or-exp,
+	    'conditional-exp       <-  'logical-or-exp . strTok("?") . try('exp) .  try(strTok(":")) . try('conditional-exp)  / 'logical-or-exp,
 	    'const-exp             <-  'conditional-exp,
-	    'logical-or-exp        <-  'logical-and-exp . (strTok("||") . ['logical-and-exp]e )*,
-	    'logical-and-exp       <-  'inclusive-or-exp . (strTok("&&") . ['inclusive-or-exp]e ) *,
-	    'inclusive-or-exp      <-  'exclusive-or-exp . (strTok("|") . ! strTok("|") . ['exclusive-or-exp]e ) *,
-	    'exclusive-or-exp      <-  'and-exp . (strTok("^") .  ['and-exp]e ) *,
-	    'and-exp               <-  'equality-exp .  (strTok("&") . ! strTok("&") . ['equality-exp]e ) *,
-	    'equality-exp          <-  'relational-exp . ((strTok("==") / strTok("!=")) .  ['relational-exp]e ) *,
+	    'logical-or-exp        <-  'logical-and-exp . (strTok("||") . try('logical-and-exp) )*,
+	    'logical-and-exp       <-  'inclusive-or-exp . (strTok("&&") . try('inclusive-or-exp) ) *,
+	    'inclusive-or-exp      <-  'exclusive-or-exp . (strTok("|") . ! strTok("|") . try('exclusive-or-exp) ) *,
+	    'exclusive-or-exp      <-  'and-exp . (strTok("^") .  try('and-exp) ) *,
+	    'and-exp               <-  'equality-exp .  (strTok("&") . ! strTok("&") . try('equality-exp) ) *,
+	    'equality-exp          <-  'relational-exp . ((strTok("==") / strTok("!=")) .  try('relational-exp) ) *,
 	    'relational-exp        <-  'shift-exp . ((strTok("<=") / strTok(">=") / strTok("<") / strTok(">")) . 'shift-exp ) *,
-	    'shift-exp             <-  'additive-exp . ((strTok("<<") / strTok(">>")) . ['additive-exp]e ) * ,
-	    'additive-exp          <-  'multiplicative-exp .  ((strTok("+") / strTok("-")) . ['multiplicative-exp]e ) *,
-	    'multiplicative-exp    <-  'cast-exp .  ((strTok("*") / strTok("/") / strTok("%")) . ['cast-exp]e )*,
-	    'cast-exp              <-  strTok("(")  . 'type-name . [strTok(")")]e . 'cast-exp  /  'unary-exp,
-	    'unary-exp             <-  strTok("++") . ['unary-exp]e  /  strTok("--") . ['unary-exp]e  / 'unary-operator . ['cast-exp]e  /
+	    'shift-exp             <-  'additive-exp . ((strTok("<<") / strTok(">>")) . try('additive-exp) ) * ,
+	    'additive-exp          <-  'multiplicative-exp .  ((strTok("+") / strTok("-")) . try('multiplicative-exp) ) *,
+	    'multiplicative-exp    <-  'cast-exp .  ((strTok("*") / strTok("/") / strTok("%")) . try('cast-exp) )*,
+	    'cast-exp              <-  strTok("(")  . 'type-name . try(strTok(")")) . 'cast-exp  /  'unary-exp,
+	    'unary-exp             <-  strTok("++") . try('unary-exp)  /  strTok("--") . try('unary-exp)  / 'unary-operator . try('cast-exp)  /
 	    strTok("sizeof") . ( ( strTok("(") . 'type-name . strTok(")") ) / 'unary-exp)   / 'postfix-exp ,
-	    'postfix-exp           <-  'primary-exp . (strTok("[") . ['exp]e . [strTok("]")]e  /
-	      strTok("(") . ('assignment-exp . (strTok(",") . ['assignment-exp]e ) * ) ? . [strTok(")")]e  /
-	      strTok(".") . ['ID]e   /  strTok("->") . ['ID]e  /  strTok("++")  /  strTok("--")) *,
-	    'primary-exp           <-  'ID  /  'STRING  /  'constant  /  strTok("(") . 'exp . [strTok(")")]e,
+	    'postfix-exp           <-  'primary-exp . (strTok("[") . try('exp) . try(strTok("]"))  /
+	      strTok("(") . ('assignment-exp . (strTok(",") . try('assignment-exp) ) * ) ? . try(strTok(")"))  /
+	      strTok(".") . try('ID)   /  strTok("->") . try('ID)  /  strTok("++")  /  strTok("--")) *,
+	    'primary-exp           <-  'ID  /  'STRING  /  'constant  /  strTok("(") . 'exp . try(strTok(")")),
 	    'constant              <-  'INT-CONST  /  'CHAR-CONST  /  'FLOAT-CONST  /  'ENUMERATION-CONST,
 	    'unary-operator        <-  strTok("&")  /  strTok("*")  /  strTok("+")  /  strTok("-")  /  strTok("~")  /  strTok("!"),
-	    'COMMENT               <-  strTok("/*") .  (! strTok("*/") . [.] ) * . [strTok("*/")]e ,
+	    'COMMENT               <-  strTok("/*") .  (! strTok("*/") . [.] ) * . try(strTok("*/")) ,
 	    'INT-CONST             <-  ( "0" .  'XDIGIT +  /  ! "0" . 'DIGIT . 'DIGIT *  /  "0" . [0-9] *) . 'SKIP, 
 	    'FLOAT-CONST           <-  strTok("0x") . (
 	      (("." / 'XDIGIT + )  /  ('XDIGIT + / ".")) . ( 'XDIGIT +) ? ), 
@@ -112,4 +112,3 @@ eof
 
 --- Example of use
 erew read-file("./bench1/yes/trace.c") .
-

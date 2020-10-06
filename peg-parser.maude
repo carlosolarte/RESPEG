@@ -102,8 +102,8 @@ mod PEG-SEMANTICS is
 
     --- Cuts
 
-    rl [Try] :  G [ [ e ]e ] x  => TRY(G [ e ] x) .
-    rl [Catch] :  G [ [ e ]c ] x  => CATCH(G [ e ] x) .
+    rl [Try] :  G [ try(e) ] x  => TRY(G [ e ] x) .
+    rl [Catch] :  G [ catch(e) ] x  => CATCH(G [ e ] x) .
 
     --- Entry point
     op parse : Grammar Exp Str -> State .

@@ -1,347 +1,347 @@
-File;Status;Steps;Status cuts;Steps cuts
-./yes/10-abc.txt;ok;163;ok;183
-./yes/50-abc.txt;ok;723;ok;823
-./yes/100-abc.txt;ok;1423;ok;1623
-./yes/200-abc.txt;ok;2823;ok;3223
-./yes/500-abc.txt;ok;7023;ok;8023
-./yes/1000-abc.txt;ok;14023;ok;16023
-./no/del/10-abc-00.txt;fail;46;fail;52
-./no/del/10-abc-01.txt;fail;73;fail;71
-./no/del/10-abc-02.txt;fail;58;fail;63
-./no/del/10-abc-03.txt;fail;52;fail;59
-./no/del/10-abc-04.txt;fail;52;fail;59
-./no/del/10-abc-05.txt;fail;40;fail;45
-./no/del/10-abc-06.txt;fail;66;fail;66
-./no/del/10-abc-07.txt;fail;46;fail;52
-./no/del/10-abc-08.txt;fail;40;fail;45
-./no/del/10-abc-09.txt;fail;52;fail;59
-./no/del/10-abc-10.txt;fail;65;fail;68
-./no/del/10-abc-11.txt;fail;51;fail;58
-./no/del/10-abc-12.txt;fail;116;error;130
-./no/del/10-abc-13.txt;fail;58;fail;63
-./no/del/10-abc-14.txt;fail;40;fail;45
-./no/del/10-abc-15.txt;fail;65;fail;68
-./no/del/10-abc-16.txt;fail;40;fail;45
-./no/del/10-abc-17.txt;fail;46;fail;52
-./no/del/10-abc-18.txt;fail;60;fail;59
-./no/del/10-abc-19.txt;fail;57;fail;65
-./no/del/50-abc-00.txt;fail;262;fail;304
-./no/del/50-abc-01.txt;fail;280;fail;325
-./no/del/50-abc-02.txt;fail;303;fail;352
-./no/del/50-abc-03.txt;fail;292;fail;339
-./no/del/50-abc-04.txt;fail;280;fail;325
-./no/del/50-abc-05.txt;fail;280;fail;325
-./no/del/50-abc-06.txt;fail;307;fail;344
-./no/del/50-abc-07.txt;fail;292;fail;339
-./no/del/50-abc-08.txt;fail;298;fail;346
-./no/del/50-abc-09.txt;fail;690;error;786
-./no/del/50-abc-10.txt;fail;286;fail;332
-./no/del/50-abc-11.txt;fail;292;fail;339
-./no/del/50-abc-12.txt;fail;299;fail;341
-./no/del/50-abc-13.txt;fail;280;fail;325
-./no/del/50-abc-14.txt;fail;286;fail;332
-./no/del/50-abc-15.txt;fail;280;fail;325
-./no/del/50-abc-16.txt;fail;665;fail;757
-./no/del/50-abc-17.txt;fail;280;fail;325
-./no/del/50-abc-18.txt;fail;286;fail;332
-./no/del/50-abc-19.txt;fail;292;fail;339
-./no/del/100-abc-00.txt;fail;592;fail;689
-./no/del/100-abc-01.txt;fail;580;fail;675
-./no/del/100-abc-02.txt;fail;580;fail;675
-./no/del/100-abc-03.txt;fail;610;fail;707
-./no/del/100-abc-04.txt;fail;592;fail;689
-./no/del/100-abc-05.txt;fail;580;fail;675
-./no/del/100-abc-06.txt;fail;598;fail;693
-./no/del/100-abc-07.txt;fail;591;fail;688
-./no/del/100-abc-08.txt;fail;605;fail;698
-./no/del/100-abc-09.txt;fail;574;fail;668
-./no/del/100-abc-10.txt;fail;598;fail;693
-./no/del/100-abc-11.txt;fail;580;fail;675
-./no/del/100-abc-12.txt;fail;598;fail;696
-./no/del/100-abc-13.txt;fail;586;fail;682
-./no/del/100-abc-14.txt;fail;586;fail;682
-./no/del/100-abc-15.txt;fail;586;fail;682
-./no/del/100-abc-16.txt;fail;586;fail;682
-./no/del/100-abc-17.txt;fail;568;fail;661
-./no/del/100-abc-18.txt;fail;597;fail;695
-./no/del/100-abc-19.txt;fail;599;fail;691
-./no/del/500-abc-00.txt;fail;2986;fail;3482
-./no/del/500-abc-01.txt;fail;3005;fail;3498
-./no/del/500-abc-02.txt;fail;2997;fail;3495
-./no/del/500-abc-03.txt;fail;2980;fail;3475
-./no/del/500-abc-04.txt;fail;2986;fail;3482
-./no/del/500-abc-05.txt;fail;2991;fail;3488
-./no/del/500-abc-06.txt;fail;2993;fail;3484
-./no/del/500-abc-07.txt;fail;2986;fail;3482
-./no/del/500-abc-08.txt;fail;2986;fail;3482
-./no/del/500-abc-09.txt;fail;2986;fail;3482
-./no/del/500-abc-10.txt;fail;6992;error;7982
-./no/del/500-abc-11.txt;fail;2999;fail;3491
-./no/del/500-abc-12.txt;fail;2992;fail;3486
-./no/del/500-abc-13.txt;fail;6992;error;7982
-./no/del/500-abc-14.txt;fail;2992;fail;3486
-./no/del/500-abc-15.txt;fail;6979;fail;7973
-./no/del/500-abc-16.txt;fail;2992;fail;3486
-./no/del/500-abc-17.txt;fail;3005;fail;3498
-./no/del/500-abc-18.txt;fail;2986;fail;3482
-./no/del/500-abc-19.txt;fail;3006;fail;3496
-./no/del/1000-abc-00.txt;fail;13965;fail;15957
-./no/del/1000-abc-01.txt;fail;5974;fail;6968
-./no/del/1000-abc-02.txt;fail;5986;fail;6982
-./no/del/1000-abc-03.txt;fail;5986;fail;6982
-./no/del/1000-abc-04.txt;fail;6007;fail;6994
-./no/del/1000-abc-05.txt;fail;5991;fail;6988
-./no/del/1000-abc-06.txt;fail;5998;fail;6993
-./no/del/1000-abc-07.txt;fail;5991;fail;6988
-./no/del/1000-abc-08.txt;fail;5997;fail;6995
-./no/del/1000-abc-09.txt;fail;6003;fail;7002
-./no/del/1000-abc-10.txt;fail;5998;fail;6993
-./no/del/1000-abc-11.txt;fail;5974;fail;6968
-./no/del/1000-abc-12.txt;fail;5986;fail;6982
-./no/del/1000-abc-13.txt;fail;5999;fail;6991
-./no/del/1000-abc-14.txt;fail;5986;fail;6982
-./no/del/1000-abc-15.txt;fail;13979;fail;15973
-./no/del/1000-abc-16.txt;fail;5997;fail;6995
-./no/del/1000-abc-17.txt;fail;5999;fail;6991
-./no/del/1000-abc-18.txt;fail;5992;fail;6986
-./no/del/1000-abc-19.txt;fail;5997;fail;6995
-./no/ins/10-abc-00.txt;fail;163;error;168
-./no/ins/10-abc-01.txt;fail;161;fail;181
-./no/ins/10-abc-02.txt;fail;36;fail;31
-./no/ins/10-abc-03.txt;fail;162;error;170
-./no/ins/10-abc-04.txt;fail;74;fail;69
-./no/ins/10-abc-05.txt;fail;75;fail;67
-./no/ins/10-abc-06.txt;fail;161;fail;181
-./no/ins/10-abc-07.txt;fail;72;fail;73
-./no/ins/10-abc-08.txt;fail;70;fail;80
-./no/ins/10-abc-09.txt;fail;75;fail;86
-./no/ins/10-abc-10.txt;fail;74;fail;69
-./no/ins/10-abc-11.txt;fail;69;fail;79
-./no/ins/10-abc-12.txt;fail;8;fail;8
-./no/ins/10-abc-13.txt;fail;75;fail;67
-./no/ins/10-abc-14.txt;fail;77;fail;63
-./no/ins/10-abc-15.txt;fail;43;fail;36
-./no/ins/10-abc-16.txt;fail;74;fail;69
-./no/ins/10-abc-17.txt;fail;50;fail;41
-./no/ins/10-abc-18.txt;fail;70;fail;58
-./no/ins/10-abc-19.txt;fail;75;fail;67
-./no/ins/50-abc-00.txt;fail;756;error;742
-./no/ins/50-abc-01.txt;fail;315;fail;366
-./no/ins/50-abc-02.txt;fail;140;fail;108
-./no/ins/50-abc-03.txt;fail;320;fail;337
-./no/ins/50-abc-04.txt;fail;343;fail;291
-./no/ins/50-abc-05.txt;fail;727;error;800
-./no/ins/50-abc-06.txt;fail;315;fail;366
-./no/ins/50-abc-07.txt;fail;322;fail;333
-./no/ins/50-abc-08.txt;fail;175;fail;133
-./no/ins/50-abc-09.txt;fail;753;error;748
-./no/ins/50-abc-10.txt;fail;351;fail;275
-./no/ins/50-abc-11.txt;fail;721;fail;821
-./no/ins/50-abc-12.txt;fail;721;fail;821
-./no/ins/50-abc-13.txt;fail;356;fail;265
-./no/ins/50-abc-14.txt;fail;726;error;802
-./no/ins/50-abc-15.txt;fail;350;fail;277
-./no/ins/50-abc-16.txt;fail;746;error;762
-./no/ins/50-abc-17.txt;fail;84;fail;68
-./no/ins/50-abc-18.txt;fail;315;fail;366
-./no/ins/50-abc-19.txt;fail;760;error;734
-./no/ins/100-abc-00.txt;fail;260;fail;191
-./no/ins/100-abc-01.txt;fail;29;fail;26
-./no/ins/100-abc-02.txt;fail;316;fail;231
-./no/ins/100-abc-03.txt;fail;609;fail;709
-./no/ins/100-abc-04.txt;fail;610;fail;710
-./no/ins/100-abc-05.txt;fail;610;fail;710
-./no/ins/100-abc-06.txt;fail;645;fail;637
-./no/ins/100-abc-07.txt;fail;1437;error;1580
-./no/ins/100-abc-08.txt;fail;699;fail;529
-./no/ins/100-abc-09.txt;fail;611;fail;705
-./no/ins/100-abc-10.txt;fail;1440;error;1574
-./no/ins/100-abc-11.txt;fail;1421;fail;1621
-./no/ins/100-abc-12.txt;fail;371;fail;273
-./no/ins/100-abc-13.txt;fail;610;fail;710
-./no/ins/100-abc-14.txt;fail;615;fail;716
-./no/ins/100-abc-15.txt;fail;1458;error;1538
-./no/ins/100-abc-16.txt;fail;603;fail;436
-./no/ins/100-abc-17.txt;fail;462;fail;338
-./no/ins/100-abc-18.txt;fail;621;fail;685
-./no/ins/100-abc-19.txt;fail;1507;error;1440
-./no/ins/200-abc-00.txt;fail;196;fail;148
-./no/ins/200-abc-01.txt;fail;2993;error;2868
-./no/ins/200-abc-02.txt;fail;560;fail;408
-./no/ins/200-abc-03.txt;fail;617;fail;446
-./no/ins/200-abc-04.txt;fail;2987;error;2880
-./no/ins/200-abc-05.txt;fail;617;fail;446
-./no/ins/200-abc-06.txt;fail;1279;fail;1269
-./no/ins/200-abc-07.txt;fail;1267;fail;913
-./no/ins/200-abc-08.txt;fail;1210;fail;1410
-./no/ins/200-abc-09.txt;fail;1361;fail;1105
-./no/ins/200-abc-10.txt;fail;329;fail;243
-./no/ins/200-abc-11.txt;fail;2971;error;2912
-./no/ins/200-abc-12.txt;fail;2982;error;2890
-./no/ins/200-abc-13.txt;fail;1396;fail;1035
-./no/ins/200-abc-14.txt;fail;329;fail;243
-./no/ins/200-abc-15.txt;fail;1215;fail;1416
-./no/ins/200-abc-16.txt;fail;1397;fail;1033
-./no/ins/200-abc-17.txt;fail;1210;fail;1410
-./no/ins/200-abc-18.txt;fail;609;fail;443
-./no/ins/200-abc-19.txt;fail;1303;fail;936
-./no/ins/500-abc-00.txt;fail;7021;fail;8021
-./no/ins/500-abc-01.txt;fail;7021;fail;8021
-./no/ins/500-abc-02.txt;fail;7071;error;7912
-./no/ins/500-abc-03.txt;fail;3363;fail;2801
-./no/ins/500-abc-04.txt;fail;3010;fail;3510
-./no/ins/500-abc-05.txt;fail;3010;fail;3510
-./no/ins/500-abc-06.txt;fail;3010;fail;3510
-./no/ins/500-abc-07.txt;fail;7021;fail;8021
-./no/ins/500-abc-08.txt;fail;2563;fail;1836
-./no/ins/500-abc-09.txt;fail;273;fail;203
-./no/ins/500-abc-10.txt;fail;3494;fail;2539
-./no/ins/500-abc-11.txt;fail;350;fail;258
-./no/ins/500-abc-12.txt;fail;7087;error;7880
-./no/ins/500-abc-13.txt;fail;2521;fail;1806
-./no/ins/500-abc-14.txt;fail;1373;fail;986
-./no/ins/500-abc-15.txt;fail;7494;error;7066
-./no/ins/500-abc-16.txt;fail;3200;fail;3127
-./no/ins/500-abc-17.txt;fail;210;fail;158
-./no/ins/500-abc-18.txt;fail;918;fail;661
-./no/ins/500-abc-19.txt;fail;7066;error;7922
-./no/ins/1000-abc-00.txt;fail;350;fail;258
-./no/ins/1000-abc-01.txt;fail;2010;fail;1441
-./no/ins/1000-abc-02.txt;fail;14021;fail;16021
-./no/ins/1000-abc-03.txt;fail;14769;error;14516
-./no/ins/1000-abc-04.txt;fail;6015;fail;7016
-./no/ins/1000-abc-05.txt;fail;14642;error;14770
-./no/ins/1000-abc-06.txt;fail;14617;error;14820
-./no/ins/1000-abc-07.txt;fail;6351;fail;6325
-./no/ins/1000-abc-08.txt;fail;6015;fail;7016
-./no/ins/1000-abc-09.txt;fail;14021;fail;16021
-./no/ins/1000-abc-10.txt;fail;6825;fail;5377
-./no/ins/1000-abc-11.txt;fail;6010;fail;7010
-./no/ins/1000-abc-12.txt;fail;6791;fail;4856
-./no/ins/1000-abc-13.txt;fail;6015;fail;7016
-./no/ins/1000-abc-14.txt;fail;6015;fail;7016
-./no/ins/1000-abc-15.txt;fail;14806;error;14442
-./no/ins/1000-abc-16.txt;fail;4193;fail;3003
-./no/ins/1000-abc-17.txt;fail;14389;error;15276
-./no/ins/1000-abc-18.txt;fail;6010;fail;7010
-./no/ins/1000-abc-19.txt;fail;14817;error;14420
-./no/subs/10-abc-00.txt;fail;69;fail;79
-./no/subs/10-abc-01.txt;fail;69;fail;79
-./no/subs/10-abc-02.txt;fail;70;fail;80
-./no/subs/10-abc-03.txt;fail;69;fail;79
-./no/subs/10-abc-04.txt;fail;69;fail;79
-./no/subs/10-abc-05.txt;fail;70;fail;80
-./no/subs/10-abc-06.txt;fail;69;fail;79
-./no/subs/10-abc-07.txt;fail;64;fail;73
-./no/subs/10-abc-08.txt;fail;69;fail;79
-./no/subs/10-abc-09.txt;fail;69;fail;79
-./no/subs/10-abc-10.txt;fail;166;error;162
-./no/subs/10-abc-11.txt;fail;69;fail;79
-./no/subs/10-abc-12.txt;fail;166;error;162
-./no/subs/10-abc-13.txt;fail;69;fail;79
-./no/subs/10-abc-14.txt;fail;64;fail;73
-./no/subs/10-abc-15.txt;fail;165;error;164
-./no/subs/10-abc-16.txt;fail;64;fail;73
-./no/subs/10-abc-17.txt;fail;70;fail;80
-./no/subs/10-abc-18.txt;fail;64;fail;73
-./no/subs/10-abc-19.txt;fail;69;fail;79
-./no/subs/50-abc-00.txt;fail;763;error;728
-./no/subs/50-abc-01.txt;fail;304;fail;353
-./no/subs/50-abc-02.txt;fail;758;error;738
-./no/subs/50-abc-03.txt;fail;304;fail;353
-./no/subs/50-abc-04.txt;fail;744;error;766
-./no/subs/50-abc-05.txt;fail;304;fail;353
-./no/subs/50-abc-06.txt;fail;304;fail;353
-./no/subs/50-abc-07.txt;fail;309;fail;359
-./no/subs/50-abc-08.txt;fail;723;error;808
-./no/subs/50-abc-09.txt;fail;309;fail;359
-./no/subs/50-abc-10.txt;fail;724;error;806
-./no/subs/50-abc-11.txt;fail;309;fail;359
-./no/subs/50-abc-12.txt;fail;730;error;794
-./no/subs/50-abc-13.txt;fail;309;fail;359
-./no/subs/50-abc-14.txt;fail;760;error;734
-./no/subs/50-abc-15.txt;fail;304;fail;353
-./no/subs/50-abc-16.txt;fail;309;fail;359
-./no/subs/50-abc-17.txt;fail;304;fail;353
-./no/subs/50-abc-18.txt;fail;309;fail;359
-./no/subs/50-abc-19.txt;fail;309;fail;359
-./no/subs/100-abc-00.txt;fail;609;fail;709
-./no/subs/100-abc-01.txt;fail;604;fail;703
-./no/subs/100-abc-02.txt;fail;604;fail;703
-./no/subs/100-abc-03.txt;fail;609;fail;709
-./no/subs/100-abc-04.txt;fail;609;fail;709
-./no/subs/100-abc-05.txt;fail;604;fail;703
-./no/subs/100-abc-06.txt;fail;604;fail;703
-./no/subs/100-abc-07.txt;fail;609;fail;709
-./no/subs/100-abc-08.txt;fail;604;fail;703
-./no/subs/100-abc-09.txt;fail;604;fail;703
-./no/subs/100-abc-10.txt;fail;609;fail;709
-./no/subs/100-abc-11.txt;fail;1507;error;1440
-./no/subs/100-abc-12.txt;fail;604;fail;703
-./no/subs/100-abc-13.txt;fail;609;fail;709
-./no/subs/100-abc-14.txt;fail;604;fail;703
-./no/subs/100-abc-15.txt;fail;1493;error;1468
-./no/subs/100-abc-16.txt;fail;604;fail;703
-./no/subs/100-abc-17.txt;fail;1446;error;1562
-./no/subs/100-abc-18.txt;fail;609;fail;709
-./no/subs/100-abc-19.txt;fail;609;fail;709
-./no/subs/200-abc-00.txt;fail;1209;fail;1409
-./no/subs/200-abc-01.txt;fail;1209;fail;1409
-./no/subs/200-abc-02.txt;fail;1204;fail;1403
-./no/subs/200-abc-03.txt;fail;1209;fail;1409
-./no/subs/200-abc-04.txt;fail;3000;error;2854
-./no/subs/200-abc-05.txt;fail;1209;fail;1409
-./no/subs/200-abc-06.txt;fail;1204;fail;1403
-./no/subs/200-abc-07.txt;fail;1209;fail;1409
-./no/subs/200-abc-08.txt;fail;1204;fail;1403
-./no/subs/200-abc-09.txt;fail;2930;error;2994
-./no/subs/200-abc-10.txt;fail;1204;fail;1403
-./no/subs/200-abc-11.txt;fail;2932;error;2990
-./no/subs/200-abc-12.txt;fail;1209;fail;1409
-./no/subs/200-abc-13.txt;fail;2867;error;3120
-./no/subs/200-abc-14.txt;fail;2831;error;3192
-./no/subs/200-abc-15.txt;fail;1204;fail;1403
-./no/subs/200-abc-16.txt;fail;1204;fail;1403
-./no/subs/200-abc-17.txt;fail;1204;fail;1403
-./no/subs/200-abc-18.txt;fail;1209;fail;1409
-./no/subs/200-abc-19.txt;fail;1204;fail;1403
-./no/subs/500-abc-00.txt;fail;3004;fail;3503
-./no/subs/500-abc-01.txt;fail;3004;fail;3503
-./no/subs/500-abc-02.txt;fail;3004;fail;3503
-./no/subs/500-abc-03.txt;fail;7087;error;7880
-./no/subs/500-abc-04.txt;fail;3004;fail;3503
-./no/subs/500-abc-05.txt;fail;3004;fail;3503
-./no/subs/500-abc-06.txt;fail;7146;error;7762
-./no/subs/500-abc-07.txt;fail;7088;error;7878
-./no/subs/500-abc-08.txt;fail;3004;fail;3503
-./no/subs/500-abc-09.txt;fail;3004;fail;3503
-./no/subs/500-abc-10.txt;fail;3009;fail;3509
-./no/subs/500-abc-11.txt;fail;3004;fail;3503
-./no/subs/500-abc-12.txt;fail;3004;fail;3503
-./no/subs/500-abc-13.txt;fail;3004;fail;3503
-./no/subs/500-abc-14.txt;fail;3009;fail;3509
-./no/subs/500-abc-15.txt;fail;3009;fail;3509
-./no/subs/500-abc-16.txt;fail;7407;error;7240
-./no/subs/500-abc-17.txt;fail;7141;error;7772
-./no/subs/500-abc-18.txt;fail;3004;fail;3503
-./no/subs/500-abc-19.txt;fail;7196;error;7662
-./no/subs/1000-abc-00.txt;fail;6009;fail;7009
-./no/subs/1000-abc-01.txt;fail;6004;fail;7003
-./no/subs/1000-abc-02.txt;fail;6009;fail;7009
-./no/subs/1000-abc-03.txt;fail;6009;fail;7009
-./no/subs/1000-abc-04.txt;fail;6004;fail;7003
-./no/subs/1000-abc-05.txt;fail;6009;fail;7009
-./no/subs/1000-abc-06.txt;fail;6004;fail;7003
-./no/subs/1000-abc-07.txt;fail;14356;error;15342
-./no/subs/1000-abc-08.txt;fail;6009;fail;7009
-./no/subs/1000-abc-09.txt;fail;6009;fail;7009
-./no/subs/1000-abc-10.txt;fail;6009;fail;7009
-./no/subs/1000-abc-11.txt;fail;6009;fail;7009
-./no/subs/1000-abc-12.txt;fail;6009;fail;7009
-./no/subs/1000-abc-13.txt;fail;6009;fail;7009
-./no/subs/1000-abc-14.txt;fail;14636;error;14782
-./no/subs/1000-abc-15.txt;fail;6009;fail;7009
-./no/subs/1000-abc-16.txt;fail;6009;fail;7009
-./no/subs/1000-abc-17.txt;fail;6009;fail;7009
-./no/subs/1000-abc-18.txt;fail;6004;fail;7003
-./no/subs/1000-abc-19.txt;fail;6009;fail;7009
+File;Status;Steps;Status with cuts;Steps with cuts
+./yes/10-abc.txt ; eps ; 163 ; eps ; 183
+./yes/50-abc.txt ; eps ; 723 ; eps ; 823
+./yes/100-abc.txt ; eps ; 1423 ; eps ; 1623
+./yes/200-abc.txt ; eps ; 2823 ; eps ; 3223
+./yes/500-abc.txt ; eps ; 7023 ; eps ; 8023
+./yes/1000-abc.txt ; eps ; 14023 ; eps ; 16023
+./no/del/10-abc-00.txt ; fail ; 46 ; fail ; 52
+./no/del/10-abc-01.txt ; fail ; 73 ; fail ; 71
+./no/del/10-abc-02.txt ; fail ; 58 ; fail ; 63
+./no/del/10-abc-03.txt ; fail ; 52 ; fail ; 59
+./no/del/10-abc-04.txt ; fail ; 52 ; fail ; 59
+./no/del/10-abc-05.txt ; fail ; 40 ; fail ; 45
+./no/del/10-abc-06.txt ; fail ; 66 ; fail ; 66
+./no/del/10-abc-07.txt ; fail ; 46 ; fail ; 52
+./no/del/10-abc-08.txt ; fail ; 40 ; fail ; 45
+./no/del/10-abc-09.txt ; fail ; 52 ; fail ; 59
+./no/del/10-abc-10.txt ; fail ; 65 ; fail ; 68
+./no/del/10-abc-11.txt ; fail ; 51 ; fail ; 58
+./no/del/10-abc-12.txt ; fail ; 116 ; error ; 130
+./no/del/10-abc-13.txt ; fail ; 58 ; fail ; 63
+./no/del/10-abc-14.txt ; fail ; 40 ; fail ; 45
+./no/del/10-abc-15.txt ; fail ; 65 ; fail ; 68
+./no/del/10-abc-16.txt ; fail ; 40 ; fail ; 45
+./no/del/10-abc-17.txt ; fail ; 46 ; fail ; 52
+./no/del/10-abc-18.txt ; fail ; 60 ; fail ; 59
+./no/del/10-abc-19.txt ; fail ; 57 ; fail ; 65
+./no/del/50-abc-00.txt ; fail ; 262 ; fail ; 304
+./no/del/50-abc-01.txt ; fail ; 280 ; fail ; 325
+./no/del/50-abc-02.txt ; fail ; 303 ; fail ; 352
+./no/del/50-abc-03.txt ; fail ; 292 ; fail ; 339
+./no/del/50-abc-04.txt ; fail ; 280 ; fail ; 325
+./no/del/50-abc-05.txt ; fail ; 280 ; fail ; 325
+./no/del/50-abc-06.txt ; fail ; 307 ; fail ; 344
+./no/del/50-abc-07.txt ; fail ; 292 ; fail ; 339
+./no/del/50-abc-08.txt ; fail ; 298 ; fail ; 346
+./no/del/50-abc-09.txt ; fail ; 690 ; error ; 786
+./no/del/50-abc-10.txt ; fail ; 286 ; fail ; 332
+./no/del/50-abc-11.txt ; fail ; 292 ; fail ; 339
+./no/del/50-abc-12.txt ; fail ; 299 ; fail ; 341
+./no/del/50-abc-13.txt ; fail ; 280 ; fail ; 325
+./no/del/50-abc-14.txt ; fail ; 286 ; fail ; 332
+./no/del/50-abc-15.txt ; fail ; 280 ; fail ; 325
+./no/del/50-abc-16.txt ; fail ; 665 ; fail ; 757
+./no/del/50-abc-17.txt ; fail ; 280 ; fail ; 325
+./no/del/50-abc-18.txt ; fail ; 286 ; fail ; 332
+./no/del/50-abc-19.txt ; fail ; 292 ; fail ; 339
+./no/del/100-abc-00.txt ; fail ; 592 ; fail ; 689
+./no/del/100-abc-01.txt ; fail ; 580 ; fail ; 675
+./no/del/100-abc-02.txt ; fail ; 580 ; fail ; 675
+./no/del/100-abc-03.txt ; fail ; 610 ; fail ; 707
+./no/del/100-abc-04.txt ; fail ; 592 ; fail ; 689
+./no/del/100-abc-05.txt ; fail ; 580 ; fail ; 675
+./no/del/100-abc-06.txt ; fail ; 598 ; fail ; 693
+./no/del/100-abc-07.txt ; fail ; 591 ; fail ; 688
+./no/del/100-abc-08.txt ; fail ; 605 ; fail ; 698
+./no/del/100-abc-09.txt ; fail ; 574 ; fail ; 668
+./no/del/100-abc-10.txt ; fail ; 598 ; fail ; 693
+./no/del/100-abc-11.txt ; fail ; 580 ; fail ; 675
+./no/del/100-abc-12.txt ; fail ; 598 ; fail ; 696
+./no/del/100-abc-13.txt ; fail ; 586 ; fail ; 682
+./no/del/100-abc-14.txt ; fail ; 586 ; fail ; 682
+./no/del/100-abc-15.txt ; fail ; 586 ; fail ; 682
+./no/del/100-abc-16.txt ; fail ; 586 ; fail ; 682
+./no/del/100-abc-17.txt ; fail ; 568 ; fail ; 661
+./no/del/100-abc-18.txt ; fail ; 597 ; fail ; 695
+./no/del/100-abc-19.txt ; fail ; 599 ; fail ; 691
+./no/del/500-abc-00.txt ; fail ; 2986 ; fail ; 3482
+./no/del/500-abc-01.txt ; fail ; 3005 ; fail ; 3498
+./no/del/500-abc-02.txt ; fail ; 2997 ; fail ; 3495
+./no/del/500-abc-03.txt ; fail ; 2980 ; fail ; 3475
+./no/del/500-abc-04.txt ; fail ; 2986 ; fail ; 3482
+./no/del/500-abc-05.txt ; fail ; 2991 ; fail ; 3488
+./no/del/500-abc-06.txt ; fail ; 2993 ; fail ; 3484
+./no/del/500-abc-07.txt ; fail ; 2986 ; fail ; 3482
+./no/del/500-abc-08.txt ; fail ; 2986 ; fail ; 3482
+./no/del/500-abc-09.txt ; fail ; 2986 ; fail ; 3482
+./no/del/500-abc-10.txt ; fail ; 6992 ; error ; 7982
+./no/del/500-abc-11.txt ; fail ; 2999 ; fail ; 3491
+./no/del/500-abc-12.txt ; fail ; 2992 ; fail ; 3486
+./no/del/500-abc-13.txt ; fail ; 6992 ; error ; 7982
+./no/del/500-abc-14.txt ; fail ; 2992 ; fail ; 3486
+./no/del/500-abc-15.txt ; fail ; 6979 ; fail ; 7973
+./no/del/500-abc-16.txt ; fail ; 2992 ; fail ; 3486
+./no/del/500-abc-17.txt ; fail ; 3005 ; fail ; 3498
+./no/del/500-abc-18.txt ; fail ; 2986 ; fail ; 3482
+./no/del/500-abc-19.txt ; fail ; 3006 ; fail ; 3496
+./no/del/1000-abc-00.txt ; fail ; 13965 ; fail ; 15957
+./no/del/1000-abc-01.txt ; fail ; 5974 ; fail ; 6968
+./no/del/1000-abc-02.txt ; fail ; 5986 ; fail ; 6982
+./no/del/1000-abc-03.txt ; fail ; 5986 ; fail ; 6982
+./no/del/1000-abc-04.txt ; fail ; 6007 ; fail ; 6994
+./no/del/1000-abc-05.txt ; fail ; 5991 ; fail ; 6988
+./no/del/1000-abc-06.txt ; fail ; 5998 ; fail ; 6993
+./no/del/1000-abc-07.txt ; fail ; 5991 ; fail ; 6988
+./no/del/1000-abc-08.txt ; fail ; 5997 ; fail ; 6995
+./no/del/1000-abc-09.txt ; fail ; 6003 ; fail ; 7002
+./no/del/1000-abc-10.txt ; fail ; 5998 ; fail ; 6993
+./no/del/1000-abc-11.txt ; fail ; 5974 ; fail ; 6968
+./no/del/1000-abc-12.txt ; fail ; 5986 ; fail ; 6982
+./no/del/1000-abc-13.txt ; fail ; 5999 ; fail ; 6991
+./no/del/1000-abc-14.txt ; fail ; 5986 ; fail ; 6982
+./no/del/1000-abc-15.txt ; fail ; 13979 ; fail ; 15973
+./no/del/1000-abc-16.txt ; fail ; 5997 ; fail ; 6995
+./no/del/1000-abc-17.txt ; fail ; 5999 ; fail ; 6991
+./no/del/1000-abc-18.txt ; fail ; 5992 ; fail ; 6986
+./no/del/1000-abc-19.txt ; fail ; 5997 ; fail ; 6995
+./no/ins/10-abc-00.txt ; fail ; 163 ; error ; 168
+./no/ins/10-abc-01.txt ; fail ; 161 ; fail ; 181
+./no/ins/10-abc-02.txt ; fail ; 36 ; fail ; 31
+./no/ins/10-abc-03.txt ; fail ; 162 ; error ; 170
+./no/ins/10-abc-04.txt ; fail ; 74 ; fail ; 69
+./no/ins/10-abc-05.txt ; fail ; 75 ; fail ; 67
+./no/ins/10-abc-06.txt ; fail ; 161 ; fail ; 181
+./no/ins/10-abc-07.txt ; fail ; 72 ; fail ; 73
+./no/ins/10-abc-08.txt ; fail ; 70 ; fail ; 80
+./no/ins/10-abc-09.txt ; fail ; 75 ; fail ; 86
+./no/ins/10-abc-10.txt ; fail ; 74 ; fail ; 69
+./no/ins/10-abc-11.txt ; fail ; 69 ; fail ; 79
+./no/ins/10-abc-12.txt ; fail ; 8 ; fail ; 8
+./no/ins/10-abc-13.txt ; fail ; 75 ; fail ; 67
+./no/ins/10-abc-14.txt ; fail ; 77 ; fail ; 63
+./no/ins/10-abc-15.txt ; fail ; 43 ; fail ; 36
+./no/ins/10-abc-16.txt ; fail ; 74 ; fail ; 69
+./no/ins/10-abc-17.txt ; fail ; 50 ; fail ; 41
+./no/ins/10-abc-18.txt ; fail ; 70 ; fail ; 58
+./no/ins/10-abc-19.txt ; fail ; 75 ; fail ; 67
+./no/ins/50-abc-00.txt ; fail ; 756 ; error ; 742
+./no/ins/50-abc-01.txt ; fail ; 315 ; fail ; 366
+./no/ins/50-abc-02.txt ; fail ; 140 ; fail ; 108
+./no/ins/50-abc-03.txt ; fail ; 320 ; fail ; 337
+./no/ins/50-abc-04.txt ; fail ; 343 ; fail ; 291
+./no/ins/50-abc-05.txt ; fail ; 727 ; error ; 800
+./no/ins/50-abc-06.txt ; fail ; 315 ; fail ; 366
+./no/ins/50-abc-07.txt ; fail ; 322 ; fail ; 333
+./no/ins/50-abc-08.txt ; fail ; 175 ; fail ; 133
+./no/ins/50-abc-09.txt ; fail ; 753 ; error ; 748
+./no/ins/50-abc-10.txt ; fail ; 351 ; fail ; 275
+./no/ins/50-abc-11.txt ; fail ; 721 ; fail ; 821
+./no/ins/50-abc-12.txt ; fail ; 721 ; fail ; 821
+./no/ins/50-abc-13.txt ; fail ; 356 ; fail ; 265
+./no/ins/50-abc-14.txt ; fail ; 726 ; error ; 802
+./no/ins/50-abc-15.txt ; fail ; 350 ; fail ; 277
+./no/ins/50-abc-16.txt ; fail ; 746 ; error ; 762
+./no/ins/50-abc-17.txt ; fail ; 84 ; fail ; 68
+./no/ins/50-abc-18.txt ; fail ; 315 ; fail ; 366
+./no/ins/50-abc-19.txt ; fail ; 760 ; error ; 734
+./no/ins/100-abc-00.txt ; fail ; 260 ; fail ; 191
+./no/ins/100-abc-01.txt ; fail ; 29 ; fail ; 26
+./no/ins/100-abc-02.txt ; fail ; 316 ; fail ; 231
+./no/ins/100-abc-03.txt ; fail ; 609 ; fail ; 709
+./no/ins/100-abc-04.txt ; fail ; 610 ; fail ; 710
+./no/ins/100-abc-05.txt ; fail ; 610 ; fail ; 710
+./no/ins/100-abc-06.txt ; fail ; 645 ; fail ; 637
+./no/ins/100-abc-07.txt ; fail ; 1437 ; error ; 1580
+./no/ins/100-abc-08.txt ; fail ; 699 ; fail ; 529
+./no/ins/100-abc-09.txt ; fail ; 611 ; fail ; 705
+./no/ins/100-abc-10.txt ; fail ; 1440 ; error ; 1574
+./no/ins/100-abc-11.txt ; fail ; 1421 ; fail ; 1621
+./no/ins/100-abc-12.txt ; fail ; 371 ; fail ; 273
+./no/ins/100-abc-13.txt ; fail ; 610 ; fail ; 710
+./no/ins/100-abc-14.txt ; fail ; 615 ; fail ; 716
+./no/ins/100-abc-15.txt ; fail ; 1458 ; error ; 1538
+./no/ins/100-abc-16.txt ; fail ; 603 ; fail ; 436
+./no/ins/100-abc-17.txt ; fail ; 462 ; fail ; 338
+./no/ins/100-abc-18.txt ; fail ; 621 ; fail ; 685
+./no/ins/100-abc-19.txt ; fail ; 1507 ; error ; 1440
+./no/ins/200-abc-00.txt ; fail ; 196 ; fail ; 148
+./no/ins/200-abc-01.txt ; fail ; 2993 ; error ; 2868
+./no/ins/200-abc-02.txt ; fail ; 560 ; fail ; 408
+./no/ins/200-abc-03.txt ; fail ; 617 ; fail ; 446
+./no/ins/200-abc-04.txt ; fail ; 2987 ; error ; 2880
+./no/ins/200-abc-05.txt ; fail ; 617 ; fail ; 446
+./no/ins/200-abc-06.txt ; fail ; 1279 ; fail ; 1269
+./no/ins/200-abc-07.txt ; fail ; 1267 ; fail ; 913
+./no/ins/200-abc-08.txt ; fail ; 1210 ; fail ; 1410
+./no/ins/200-abc-09.txt ; fail ; 1361 ; fail ; 1105
+./no/ins/200-abc-10.txt ; fail ; 329 ; fail ; 243
+./no/ins/200-abc-11.txt ; fail ; 2971 ; error ; 2912
+./no/ins/200-abc-12.txt ; fail ; 2982 ; error ; 2890
+./no/ins/200-abc-13.txt ; fail ; 1396 ; fail ; 1035
+./no/ins/200-abc-14.txt ; fail ; 329 ; fail ; 243
+./no/ins/200-abc-15.txt ; fail ; 1215 ; fail ; 1416
+./no/ins/200-abc-16.txt ; fail ; 1397 ; fail ; 1033
+./no/ins/200-abc-17.txt ; fail ; 1210 ; fail ; 1410
+./no/ins/200-abc-18.txt ; fail ; 609 ; fail ; 443
+./no/ins/200-abc-19.txt ; fail ; 1303 ; fail ; 936
+./no/ins/500-abc-00.txt ; fail ; 7021 ; fail ; 8021
+./no/ins/500-abc-01.txt ; fail ; 7021 ; fail ; 8021
+./no/ins/500-abc-02.txt ; fail ; 7071 ; error ; 7912
+./no/ins/500-abc-03.txt ; fail ; 3363 ; fail ; 2801
+./no/ins/500-abc-04.txt ; fail ; 3010 ; fail ; 3510
+./no/ins/500-abc-05.txt ; fail ; 3010 ; fail ; 3510
+./no/ins/500-abc-06.txt ; fail ; 3010 ; fail ; 3510
+./no/ins/500-abc-07.txt ; fail ; 7021 ; fail ; 8021
+./no/ins/500-abc-08.txt ; fail ; 2563 ; fail ; 1836
+./no/ins/500-abc-09.txt ; fail ; 273 ; fail ; 203
+./no/ins/500-abc-10.txt ; fail ; 3494 ; fail ; 2539
+./no/ins/500-abc-11.txt ; fail ; 350 ; fail ; 258
+./no/ins/500-abc-12.txt ; fail ; 7087 ; error ; 7880
+./no/ins/500-abc-13.txt ; fail ; 2521 ; fail ; 1806
+./no/ins/500-abc-14.txt ; fail ; 1373 ; fail ; 986
+./no/ins/500-abc-15.txt ; fail ; 7494 ; error ; 7066
+./no/ins/500-abc-16.txt ; fail ; 3200 ; fail ; 3127
+./no/ins/500-abc-17.txt ; fail ; 210 ; fail ; 158
+./no/ins/500-abc-18.txt ; fail ; 918 ; fail ; 661
+./no/ins/500-abc-19.txt ; fail ; 7066 ; error ; 7922
+./no/ins/1000-abc-00.txt ; fail ; 350 ; fail ; 258
+./no/ins/1000-abc-01.txt ; fail ; 2010 ; fail ; 1441
+./no/ins/1000-abc-02.txt ; fail ; 14021 ; fail ; 16021
+./no/ins/1000-abc-03.txt ; fail ; 14769 ; error ; 14516
+./no/ins/1000-abc-04.txt ; fail ; 6015 ; fail ; 7016
+./no/ins/1000-abc-05.txt ; fail ; 14642 ; error ; 14770
+./no/ins/1000-abc-06.txt ; fail ; 14617 ; error ; 14820
+./no/ins/1000-abc-07.txt ; fail ; 6351 ; fail ; 6325
+./no/ins/1000-abc-08.txt ; fail ; 6015 ; fail ; 7016
+./no/ins/1000-abc-09.txt ; fail ; 14021 ; fail ; 16021
+./no/ins/1000-abc-10.txt ; fail ; 6825 ; fail ; 5377
+./no/ins/1000-abc-11.txt ; fail ; 6010 ; fail ; 7010
+./no/ins/1000-abc-12.txt ; fail ; 6791 ; fail ; 4856
+./no/ins/1000-abc-13.txt ; fail ; 6015 ; fail ; 7016
+./no/ins/1000-abc-14.txt ; fail ; 6015 ; fail ; 7016
+./no/ins/1000-abc-15.txt ; fail ; 14806 ; error ; 14442
+./no/ins/1000-abc-16.txt ; fail ; 4193 ; fail ; 3003
+./no/ins/1000-abc-17.txt ; fail ; 14389 ; error ; 15276
+./no/ins/1000-abc-18.txt ; fail ; 6010 ; fail ; 7010
+./no/ins/1000-abc-19.txt ; fail ; 14817 ; error ; 14420
+./no/subs/10-abc-00.txt ; fail ; 69 ; fail ; 79
+./no/subs/10-abc-01.txt ; fail ; 69 ; fail ; 79
+./no/subs/10-abc-02.txt ; fail ; 70 ; fail ; 80
+./no/subs/10-abc-03.txt ; fail ; 69 ; fail ; 79
+./no/subs/10-abc-04.txt ; fail ; 69 ; fail ; 79
+./no/subs/10-abc-05.txt ; fail ; 70 ; fail ; 80
+./no/subs/10-abc-06.txt ; fail ; 69 ; fail ; 79
+./no/subs/10-abc-07.txt ; fail ; 64 ; fail ; 73
+./no/subs/10-abc-08.txt ; fail ; 69 ; fail ; 79
+./no/subs/10-abc-09.txt ; fail ; 69 ; fail ; 79
+./no/subs/10-abc-10.txt ; fail ; 166 ; error ; 162
+./no/subs/10-abc-11.txt ; fail ; 69 ; fail ; 79
+./no/subs/10-abc-12.txt ; fail ; 166 ; error ; 162
+./no/subs/10-abc-13.txt ; fail ; 69 ; fail ; 79
+./no/subs/10-abc-14.txt ; fail ; 64 ; fail ; 73
+./no/subs/10-abc-15.txt ; fail ; 165 ; error ; 164
+./no/subs/10-abc-16.txt ; fail ; 64 ; fail ; 73
+./no/subs/10-abc-17.txt ; fail ; 70 ; fail ; 80
+./no/subs/10-abc-18.txt ; fail ; 64 ; fail ; 73
+./no/subs/10-abc-19.txt ; fail ; 69 ; fail ; 79
+./no/subs/50-abc-00.txt ; fail ; 763 ; error ; 728
+./no/subs/50-abc-01.txt ; fail ; 304 ; fail ; 353
+./no/subs/50-abc-02.txt ; fail ; 758 ; error ; 738
+./no/subs/50-abc-03.txt ; fail ; 304 ; fail ; 353
+./no/subs/50-abc-04.txt ; fail ; 744 ; error ; 766
+./no/subs/50-abc-05.txt ; fail ; 304 ; fail ; 353
+./no/subs/50-abc-06.txt ; fail ; 304 ; fail ; 353
+./no/subs/50-abc-07.txt ; fail ; 309 ; fail ; 359
+./no/subs/50-abc-08.txt ; fail ; 723 ; error ; 808
+./no/subs/50-abc-09.txt ; fail ; 309 ; fail ; 359
+./no/subs/50-abc-10.txt ; fail ; 724 ; error ; 806
+./no/subs/50-abc-11.txt ; fail ; 309 ; fail ; 359
+./no/subs/50-abc-12.txt ; fail ; 730 ; error ; 794
+./no/subs/50-abc-13.txt ; fail ; 309 ; fail ; 359
+./no/subs/50-abc-14.txt ; fail ; 760 ; error ; 734
+./no/subs/50-abc-15.txt ; fail ; 304 ; fail ; 353
+./no/subs/50-abc-16.txt ; fail ; 309 ; fail ; 359
+./no/subs/50-abc-17.txt ; fail ; 304 ; fail ; 353
+./no/subs/50-abc-18.txt ; fail ; 309 ; fail ; 359
+./no/subs/50-abc-19.txt ; fail ; 309 ; fail ; 359
+./no/subs/100-abc-00.txt ; fail ; 609 ; fail ; 709
+./no/subs/100-abc-01.txt ; fail ; 604 ; fail ; 703
+./no/subs/100-abc-02.txt ; fail ; 604 ; fail ; 703
+./no/subs/100-abc-03.txt ; fail ; 609 ; fail ; 709
+./no/subs/100-abc-04.txt ; fail ; 609 ; fail ; 709
+./no/subs/100-abc-05.txt ; fail ; 604 ; fail ; 703
+./no/subs/100-abc-06.txt ; fail ; 604 ; fail ; 703
+./no/subs/100-abc-07.txt ; fail ; 609 ; fail ; 709
+./no/subs/100-abc-08.txt ; fail ; 604 ; fail ; 703
+./no/subs/100-abc-09.txt ; fail ; 604 ; fail ; 703
+./no/subs/100-abc-10.txt ; fail ; 609 ; fail ; 709
+./no/subs/100-abc-11.txt ; fail ; 1507 ; error ; 1440
+./no/subs/100-abc-12.txt ; fail ; 604 ; fail ; 703
+./no/subs/100-abc-13.txt ; fail ; 609 ; fail ; 709
+./no/subs/100-abc-14.txt ; fail ; 604 ; fail ; 703
+./no/subs/100-abc-15.txt ; fail ; 1493 ; error ; 1468
+./no/subs/100-abc-16.txt ; fail ; 604 ; fail ; 703
+./no/subs/100-abc-17.txt ; fail ; 1446 ; error ; 1562
+./no/subs/100-abc-18.txt ; fail ; 609 ; fail ; 709
+./no/subs/100-abc-19.txt ; fail ; 609 ; fail ; 709
+./no/subs/200-abc-00.txt ; fail ; 1209 ; fail ; 1409
+./no/subs/200-abc-01.txt ; fail ; 1209 ; fail ; 1409
+./no/subs/200-abc-02.txt ; fail ; 1204 ; fail ; 1403
+./no/subs/200-abc-03.txt ; fail ; 1209 ; fail ; 1409
+./no/subs/200-abc-04.txt ; fail ; 3000 ; error ; 2854
+./no/subs/200-abc-05.txt ; fail ; 1209 ; fail ; 1409
+./no/subs/200-abc-06.txt ; fail ; 1204 ; fail ; 1403
+./no/subs/200-abc-07.txt ; fail ; 1209 ; fail ; 1409
+./no/subs/200-abc-08.txt ; fail ; 1204 ; fail ; 1403
+./no/subs/200-abc-09.txt ; fail ; 2930 ; error ; 2994
+./no/subs/200-abc-10.txt ; fail ; 1204 ; fail ; 1403
+./no/subs/200-abc-11.txt ; fail ; 2932 ; error ; 2990
+./no/subs/200-abc-12.txt ; fail ; 1209 ; fail ; 1409
+./no/subs/200-abc-13.txt ; fail ; 2867 ; error ; 3120
+./no/subs/200-abc-14.txt ; fail ; 2831 ; error ; 3192
+./no/subs/200-abc-15.txt ; fail ; 1204 ; fail ; 1403
+./no/subs/200-abc-16.txt ; fail ; 1204 ; fail ; 1403
+./no/subs/200-abc-17.txt ; fail ; 1204 ; fail ; 1403
+./no/subs/200-abc-18.txt ; fail ; 1209 ; fail ; 1409
+./no/subs/200-abc-19.txt ; fail ; 1204 ; fail ; 1403
+./no/subs/500-abc-00.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-01.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-02.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-03.txt ; fail ; 7087 ; error ; 7880
+./no/subs/500-abc-04.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-05.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-06.txt ; fail ; 7146 ; error ; 7762
+./no/subs/500-abc-07.txt ; fail ; 7088 ; error ; 7878
+./no/subs/500-abc-08.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-09.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-10.txt ; fail ; 3009 ; fail ; 3509
+./no/subs/500-abc-11.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-12.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-13.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-14.txt ; fail ; 3009 ; fail ; 3509
+./no/subs/500-abc-15.txt ; fail ; 3009 ; fail ; 3509
+./no/subs/500-abc-16.txt ; fail ; 7407 ; error ; 7240
+./no/subs/500-abc-17.txt ; fail ; 7141 ; error ; 7772
+./no/subs/500-abc-18.txt ; fail ; 3004 ; fail ; 3503
+./no/subs/500-abc-19.txt ; fail ; 7196 ; error ; 7662
+./no/subs/1000-abc-00.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-01.txt ; fail ; 6004 ; fail ; 7003
+./no/subs/1000-abc-02.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-03.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-04.txt ; fail ; 6004 ; fail ; 7003
+./no/subs/1000-abc-05.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-06.txt ; fail ; 6004 ; fail ; 7003
+./no/subs/1000-abc-07.txt ; fail ; 14356 ; error ; 15342
+./no/subs/1000-abc-08.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-09.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-10.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-11.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-12.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-13.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-14.txt ; fail ; 14636 ; error ; 14782
+./no/subs/1000-abc-15.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-16.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-17.txt ; fail ; 6009 ; fail ; 7009
+./no/subs/1000-abc-18.txt ; fail ; 6004 ; fail ; 7003
+./no/subs/1000-abc-19.txt ; fail ; 6009 ; fail ; 7009

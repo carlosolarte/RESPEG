@@ -80,19 +80,19 @@ mod PEG-SEMANTICS is
     rl [Star] : STAR(error(n),  G [ e * ] x  : n' ) => error((n)) .
 
     
-    rl [Negative] :  G  [ ! e ] x : n => NEG( G [ e ] x : s(n) , G [ ! e ] x : (n) ) .
+    rl [Negative] :  G  [ ! e ] x : n => NEG( G [ e ] x : s(n) , G [ ! e ] x : s(n) ) .
     rl [Negative] : NEG(fail(n), G [ ! e ] x : n' ) => { x ; (n) } .
     rl [Negative] : NEG(error(n), G [ ! e ] x : n' ) => { x ; (n) } .
     rl [Negative] : NEG({ y ; n }, S) => fail((n)) .
 
     --- Cuts
 
-    rl [Catch] :  G [ [ e ]c ] x : n  => CATCH(G [ e ] x : s(n)) .
+    rl [Catch] :  G [ catch(e) ] x : n  => CATCH(G [ e ] x : s(n)) .
     rl [Catch] : CATCH({x ; n}) => { x ; (n) }.
     rl [Catch] : CATCH(fail(n)) => fail((n)) .
     rl [Catch] : CATCH(error(n)) => fail((n)) .
 
-    rl [Try] :  G [ [ e ]e ] x : n  => TRY(G [ e ] x : s(n)) .
+    rl [Try] :  G [ try(e) ] x : n  => TRY(G [ e ] x : s(n)) .
     rl [Try] : TRY({x ; n}) => { x ; (n) }.
     rl [Try] : TRY(fail(n)) => error((n)) .
     rl [Try] : TRY(error(n)) => error((n)) .
@@ -168,4 +168,4 @@ rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 
 rew parse( 'S <- ( &('R1  . "c") ) . "a" + . 'R2 . (! [.]) , 'R1 <- "a"  . ('R1 ?) . "b", 'R2 <- "b" . ('R2 ?) . "c" , 'S , str("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc") ) .  
 
 --- A simple example of cut
-rew parse( 'A <- "a" . ["b" . "c"]e / "a" . ["d"]e, 'A, str("abx")) .
+rew parse( 'A <- "a" . try("b" . "c") / "a" . try("d"), 'A, str("abx")) .

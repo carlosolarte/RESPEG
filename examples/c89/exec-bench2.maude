@@ -9,7 +9,6 @@ load c89 .
 parse "Without cuts" .
 
 erew read-file("./bench2/yes/array01.c") .
-erew read-file("./bench2/yes/array01.c") .
 erew read-file("./bench2/yes/array02.c") .
 erew read-file("./bench2/yes/array03.c") .
 erew read-file("./bench2/yes/assignment01.c") .
@@ -120,7 +119,6 @@ erew read-file("./bench2/no/zeroDecl01.c") .
 load c89-cut .
 
 parse "With cuts" .
-erew read-file("./bench2/yes/array01.c") .
 erew read-file("./bench2/yes/array01.c") .
 erew read-file("./bench2/yes/array02.c") .
 erew read-file("./bench2/yes/array03.c") .
