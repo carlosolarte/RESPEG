@@ -1,4 +1,6 @@
 # RESPEG: Rewriting Semantics for PEGs
+[![DOI](https://zenodo.org/badge/295793022.svg)](https://zenodo.org/badge/latestdoi/295793022)
+
 
 ## General Description
 
